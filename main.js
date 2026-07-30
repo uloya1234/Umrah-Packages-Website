@@ -192,6 +192,12 @@ function showAuthForm(mode) {
     else if (mode === 'reset') resetForm.style.display = 'block';
 }
 
+// ====== This is the function that was "not defined" – it's here! ======
+function showAuthModal(mode = 'signin') {
+    authModal.style.display = 'flex';
+    showAuthForm(mode);
+}
+
 // ============================================================
 // Toast
 // ============================================================
