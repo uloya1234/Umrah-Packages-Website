@@ -1,1 +1,2662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nur Travel — Umrah Packages & Travel Services</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --emerald: #1a4d3e;
+            --emerald-light: #2a6b56;
+            --emerald-dark: #0f3328;
+            --forest: #1e3d32;
+            --cream: #f8f4ed;
+            --cream-dark: #ede6db;
+            --off-white: #fcfaf7;
+            --sand: #d4c9b8;
+            --gold: #c9a84c;
+            --gold-light: #e0c86e;
+            --gold-subtle: #d4b85a;
+            --charcoal: #1e1e1e;
+            --charcoal-light: #2d2d2d;
+            --text: #1e1e1e;
+            --text-muted: #5a5a5a;
+            --text-light: #8a8a8a;
+            --shadow-sm: 0 2px 12px rgba(26, 77, 62, 0.08);
+            --shadow-md: 0 8px 32px rgba(26, 77, 62, 0.12);
+            --shadow-lg: 0 16px 56px rgba(26, 77, 62, 0.16);
+            --shadow-gold: 0 4px 24px rgba(201, 168, 76, 0.25);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text);
+            background: var(--off-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            background: none;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== UTILITY ===== */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            background: rgba(26, 77, 62, 0.08);
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+        }
+
+        .section-title span {
+            color: var(--emerald);
+        }
+
+        .section-sub {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--emerald);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 14px 32px;
+            border-radius: 100px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid transparent;
+        }
+        .btn-primary:hover {
+            background: var(--emerald-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--emerald);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 14px 32px;
+            border-radius: 100px;
+            border: 1.5px solid var(--emerald);
+            transition: var(--transition);
+        }
+        .btn-secondary:hover {
+            background: var(--emerald);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gold);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 14px 32px;
+            border-radius: 100px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-gold);
+        }
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 14px 32px;
+            border-radius: 100px;
+            border: 1.5px solid var(--gold);
+            transition: var(--transition);
+        }
+        .btn-outline-gold:hover {
+            background: var(--gold);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-green {
+            background: rgba(26, 77, 62, 0.12);
+            color: var(--emerald);
+        }
+        .badge-gold {
+            background: rgba(201, 168, 76, 0.15);
+            color: #8a6e2a;
+        }
+        .badge-blue {
+            background: rgba(41, 128, 185, 0.12);
+            color: #1a6b8a;
+        }
+
+        /* ===== GEOMETRIC DIVIDER ===== */
+        .geo-divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin: 40px 0 20px;
+            opacity: 0.25;
+        }
+        .geo-divider .line {
+            height: 1px;
+            width: 60px;
+            background: var(--sand);
+        }
+        .geo-divider .diamond {
+            width: 8px;
+            height: 8px;
+            transform: rotate(45deg);
+            background: var(--gold-subtle);
+            border-radius: 1px;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: var(--transition);
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(252, 250, 247, 0.92);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 2px 24px rgba(0, 0, 0, 0.06);
+            padding: 10px 0;
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            transition: var(--transition);
+        }
+        .navbar.scrolled .nav-logo {
+            color: var(--emerald);
+        }
+        .nav-logo .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--gold);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transform: rotate(45deg);
+        }
+        .nav-logo .logo-icon i {
+            transform: rotate(-45deg);
+        }
+        .nav-logo span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            transition: var(--transition);
+            position: relative;
+        }
+        .navbar.scrolled .nav-links a {
+            color: var(--charcoal-light);
+        }
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .nav-actions .btn-signin {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .navbar.scrolled .nav-actions .btn-signin {
+            color: var(--charcoal-light);
+        }
+        .nav-actions .btn-signin:hover {
+            color: var(--gold);
+        }
+        .nav-actions .btn-nav-cta {
+            background: var(--gold);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        .nav-actions .btn-nav-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: #fff;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .navbar.scrolled .nav-toggle span {
+            background: var(--charcoal);
+        }
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: var(--emerald-dark);
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48cGF0aCBkPSJNMjAgMjBoMTB2MTBIMjB6TTUwIDIwaDEwdjEwSDUweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvc3ZnPg=='),
+                linear-gradient(135deg, #0f3328 0%, #1a4d3e 50%, #1e3d32 100%);
+            background-size: 80px 80px, cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(15, 51, 40, 0.3) 0%, rgba(15, 51, 40, 0.7) 100%);
+        }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+
+        .hero-content {
+            max-width: 680px;
+        }
+        .hero-content .badge {
+            background: rgba(201, 168, 76, 0.2);
+            color: var(--gold-light);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            padding: 6px 18px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+        }
+        .hero-content h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .hero-content h1 span {
+            color: var(--gold-light);
+        }
+        .hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 520px;
+            line-height: 1.8;
+            margin-bottom: 36px;
+        }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .hero-actions .btn-hero-primary {
+            background: var(--gold);
+            color: #fff;
+            padding: 16px 38px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-gold);
+        }
+        .hero-actions .btn-hero-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+        }
+        .hero-actions .btn-hero-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            padding: 16px 38px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            transition: var(--transition);
+        }
+        .hero-actions .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 56px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .hero-stats .stat-item {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .hero-stats .stat-item .num {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #fff;
+            display: block;
+            line-height: 1.2;
+        }
+        .hero-stats .stat-item .label {
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== TRUST SECTION ===== */
+        .trust-section {
+            background: var(--off-white);
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(26, 77, 62, 0.06);
+        }
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 24px;
+        }
+        .trust-card {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            padding: 24px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(26, 77, 62, 0.04);
+            transition: var(--transition);
+        }
+        .trust-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        .trust-card .icon {
+            font-size: 1.6rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .trust-card h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+        .trust-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ===== PACKAGES ===== */
+        .packages-section {
+            background: var(--cream);
+            padding: 80px 0;
+        }
+        .packages-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .packages-header .section-sub {
+            margin: 0 auto;
+        }
+
+        .packages-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .packages-filters button {
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: #fff;
+            color: var(--text-muted);
+            border: 1px solid rgba(26, 77, 62, 0.08);
+            transition: var(--transition);
+        }
+        .packages-filters button.active,
+        .packages-filters button:hover {
+            background: var(--emerald);
+            color: #fff;
+            border-color: var(--emerald);
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .package-card {
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(26, 77, 62, 0.06);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        .package-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .package-card .pkg-header {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+        }
+        .package-card .pkg-header .pkg-name {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+        .package-card .pkg-header .pkg-stars {
+            color: var(--gold);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+        .package-card .pkg-body {
+            padding: 20px 24px;
+            flex: 1;
+        }
+        .package-card .pkg-body .pkg-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .package-card .pkg-body .pkg-meta i {
+            width: 20px;
+            color: var(--emerald);
+        }
+        .package-card .pkg-footer {
+            padding: 16px 24px 24px;
+            border-top: 1px solid rgba(26, 77, 62, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .package-card .pkg-footer .price {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--emerald);
+        }
+        .package-card .pkg-footer .price small {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .package-card .pkg-footer .pkg-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .package-card .pkg-footer .pkg-actions .btn-sm {
+            padding: 8px 18px;
+            font-size: 0.8rem;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .package-card .pkg-footer .pkg-actions .btn-sm-outline {
+            border: 1px solid var(--emerald);
+            color: var(--emerald);
+            background: transparent;
+        }
+        .package-card .pkg-footer .pkg-actions .btn-sm-outline:hover {
+            background: var(--emerald);
+            color: #fff;
+        }
+        .package-card .pkg-footer .pkg-actions .btn-sm-gold {
+            background: var(--gold);
+            color: #fff;
+        }
+        .package-card .pkg-footer .pkg-actions .btn-sm-gold:hover {
+            background: var(--gold-light);
+        }
+
+        /* ===== INCLUDED SECTION ===== */
+        .included-section {
+            background: var(--off-white);
+            padding: 80px 0;
+        }
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
+            margin-top: 40px;
+        }
+        .included-card {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            padding: 28px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(26, 77, 62, 0.04);
+            transition: var(--transition);
+        }
+        .included-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        .included-card .icon {
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+        .included-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+        }
+        .included-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-section {
+            background: var(--cream);
+            padding: 80px 0;
+        }
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+        .how-step {
+            text-align: center;
+            position: relative;
+        }
+        .how-step .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--emerald);
+            color: #fff;
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 auto 16px;
+            box-shadow: var(--shadow-sm);
+        }
+        .how-step h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+        }
+        .how-step p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            max-width: 260px;
+            margin: 0 auto;
+        }
+        .how-step .step-line {
+            display: none;
+        }
+
+        /* ===== WHY CHOOSE US ===== */
+        .why-section {
+            background: var(--off-white);
+            padding: 80px 0;
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+            margin-top: 40px;
+        }
+        .why-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            background: #fff;
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(26, 77, 62, 0.04);
+        }
+        .why-item .icon {
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .why-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+        .why-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== MAKKAH & MADINAH ===== */
+        .cities-section {
+            background: var(--cream);
+            padding: 80px 0;
+        }
+        .cities-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 40px;
+        }
+        .city-card {
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .city-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        .city-card .city-img {
+            height: 200px;
+            background: var(--emerald-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .city-card .city-img .city-label {
+            position: absolute;
+            bottom: 16px;
+            left: 20px;
+            color: #fff;
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+        .city-card .city-body {
+            padding: 24px;
+        }
+        .city-card .city-body p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ===== FLIGHT SEARCH ===== */
+        .flight-search-section {
+            background: var(--off-white);
+            padding: 80px 0;
+        }
+        .search-card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(26, 77, 62, 0.04);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .search-card .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        .search-card .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .search-card .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .search-card .form-group input,
+        .search-card .form-group select {
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(26, 77, 62, 0.1);
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            background: var(--off-white);
+            transition: var(--transition);
+            width: 100%;
+        }
+        .search-card .form-group input:focus,
+        .search-card .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+        }
+        .search-card .search-btn {
+            background: var(--gold);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            margin-top: 8px;
+            width: 100%;
+        }
+        .search-card .search-btn:hover {
+            background: var(--gold-light);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-section {
+            background: var(--cream);
+            padding: 80px 0;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            margin-top: 40px;
+        }
+        .testimonial-card {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(26, 77, 62, 0.04);
+            transition: var(--transition);
+        }
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        .testimonial-card .stars {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        .testimonial-card blockquote {
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .testimonial-card .author .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--emerald);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .testimonial-card .author .name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .testimonial-card .author .loc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== FAQ ===== */
+        .faq-section {
+            background: var(--off-white);
+            padding: 80px 0;
+        }
+        .faq-list {
+            max-width: 760px;
+            margin: 40px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .faq-item {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(26, 77, 62, 0.06);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .faq-item:hover {
+            border-color: rgba(26, 77, 62, 0.12);
+        }
+        .faq-item .faq-question {
+            width: 100%;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: none;
+            border: none;
+            text-align: left;
+            color: var(--charcoal);
+            transition: var(--transition);
+            gap: 16px;
+        }
+        .faq-item .faq-question:hover {
+            color: var(--emerald);
+        }
+        .faq-item .faq-question i {
+            transition: var(--transition);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+            color: var(--gold);
+        }
+        .faq-item .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 24px;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 24px 20px;
+        }
+        .faq-item .faq-answer p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--charcoal);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 0 30px;
+        }
+        .footer .container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        .footer .brand h3 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        .footer .brand h3 span {
+            color: var(--gold);
+        }
+        .footer .brand p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+        .footer h4 {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .footer ul li {
+            margin-bottom: 8px;
+        }
+        .footer ul li a {
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .footer ul li a:hover {
+            color: var(--gold);
+        }
+        .footer .socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .footer .socials a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .footer .socials a:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.08);
+        }
+        .footer .bottom {
+            grid-column: 1 / -1;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 24px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.8rem;
+        }
+        .footer .bottom .links {
+            display: flex;
+            gap: 20px;
+        }
+        .footer .bottom .links a {
+            transition: var(--transition);
+        }
+        .footer .bottom .links a:hover {
+            color: var(--gold);
+        }
+
+        /* ============================================================
+                   DASHBOARD
+                   ============================================================ */
+        .dashboard-wrapper {
+            display: none;
+            min-height: 100vh;
+            background: var(--off-white);
+        }
+        .dashboard-wrapper.active {
+            display: flex;
+        }
+
+        .dash-sidebar {
+            width: 260px;
+            background: #fff;
+            border-right: 1px solid rgba(26, 77, 62, 0.06);
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 900;
+            overflow-y: auto;
+            transition: var(--transition);
+        }
+        .dash-sidebar .dash-logo {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--emerald);
+            padding: 0 12px 24px;
+            border-bottom: 1px solid rgba(26, 77, 62, 0.06);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dash-sidebar .dash-logo span {
+            color: var(--gold);
+        }
+        .dash-sidebar .dash-logo i {
+            color: var(--gold);
+        }
+
+        .dash-nav {
+            flex: 1;
+        }
+        .dash-nav .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            margin-bottom: 2px;
+            cursor: pointer;
+        }
+        .dash-nav .nav-item:hover {
+            background: rgba(26, 77, 62, 0.05);
+            color: var(--charcoal);
+        }
+        .dash-nav .nav-item.active {
+            background: rgba(26, 77, 62, 0.08);
+            color: var(--emerald);
+            font-weight: 600;
+        }
+        .dash-nav .nav-item i {
+            width: 20px;
+            font-size: 1rem;
+            text-align: center;
+        }
+        .dash-nav .nav-item .badge-dot {
+            margin-left: auto;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .dash-sidebar .dash-user {
+            border-top: 1px solid rgba(26, 77, 62, 0.06);
+            padding-top: 16px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .dash-sidebar .dash-user .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--emerald);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .dash-sidebar .dash-user .info .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+        }
+        .dash-sidebar .dash-user .info .email {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .dash-main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 32px 40px 60px;
+            min-height: 100vh;
+        }
+
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dash-header h2 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .dash-header h2 span {
+            color: var(--emerald);
+        }
+        .dash-header .dash-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .dash-header .dash-actions .notif-btn {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid rgba(26, 77, 62, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+        .dash-header .dash-actions .notif-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .dash-header .dash-actions .notif-btn .notif-dot {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e74c3c;
+            border: 2px solid #fff;
+        }
+
+        /* Dashboard Cards */
+        .dash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .dash-card {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(26, 77, 62, 0.04);
+        }
+        .dash-card .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        .dash-card .value {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin: 6px 0 2px;
+        }
+        .dash-card .sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .dash-card .icon-bg {
+            float: right;
+            font-size: 2rem;
+            color: rgba(26, 77, 62, 0.08);
+        }
+
+        /* Trip timeline */
+        .timeline {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(26, 77, 62, 0.04);
+            margin-top: 20px;
+        }
+        .timeline .tl-item {
+            display: flex;
+            gap: 20px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+            align-items: flex-start;
+        }
+        .timeline .tl-item:last-child {
+            border-bottom: none;
+        }
+        .timeline .tl-item .tl-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(26, 77, 62, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--emerald);
+            flex-shrink: 0;
+        }
+        .timeline .tl-item .tl-content {
+            flex: 1;
+        }
+        .timeline .tl-item .tl-content .tl-title {
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+        .timeline .tl-item .tl-content .tl-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .timeline .tl-item .tl-content .tl-status {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--emerald);
+            margin-top: 4px;
+        }
+
+        /* Tab content */
+        .dash-tab {
+            display: none;
+        }
+        .dash-tab.active {
+            display: block;
+        }
+
+        /* Document list */
+        .doc-list {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            padding: 8px 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(26, 77, 62, 0.04);
+        }
+        .doc-list .doc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px;
+            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+            gap: 16px;
+        }
+        .doc-list .doc-item:last-child {
+            border-bottom: none;
+        }
+        .doc-list .doc-item .doc-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .doc-list .doc-item .doc-info i {
+            font-size: 1.4rem;
+            color: var(--gold);
+        }
+        .doc-list .doc-item .doc-info .doc-name {
+            font-weight: 500;
+        }
+        .doc-list .doc-item .doc-info .doc-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .doc-list .doc-item .doc-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .doc-list .doc-item .doc-actions button {
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .doc-list .doc-item .doc-actions .btn-view {
+            background: rgba(26, 77, 62, 0.06);
+            color: var(--emerald);
+        }
+        .doc-list .doc-item .doc-actions .btn-view:hover {
+            background: var(--emerald);
+            color: #fff;
+        }
+        .doc-list .doc-item .doc-actions .btn-dl {
+            background: var(--gold);
+            color: #fff;
+        }
+        .doc-list .doc-item .doc-actions .btn-dl:hover {
+            background: var(--gold-light);
+        }
+
+        /* Payment table */
+        .payment-table {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(26, 77, 62, 0.04);
+            margin-top: 16px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .payment-table th {
+            background: rgba(26, 77, 62, 0.04);
+            text-align: left;
+            padding: 14px 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+        .payment-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+            font-size: 0.9rem;
+        }
+        .payment-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ===== ADMIN ===== */
+        .admin-badge {
+            background: rgba(201, 168, 76, 0.12);
+            color: #8a6e2a;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 100px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .footer .container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .cities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links,
+            .nav-actions .btn-signin {
+                display: none;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+            .nav-actions .btn-nav-cta {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(15, 51, 40, 0.98);
+                backdrop-filter: blur(16px);
+                z-index: 999;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 24px;
+                padding: 40px;
+            }
+            .mobile-menu.active {
+                display: flex;
+            }
+            .mobile-menu a {
+                color: #fff;
+                font-size: 1.3rem;
+                font-weight: 500;
+                transition: var(--transition);
+            }
+            .mobile-menu a:hover {
+                color: var(--gold);
+            }
+            .mobile-menu .btn-mobile-cta {
+                background: var(--gold);
+                color: #fff;
+                padding: 14px 40px;
+                border-radius: 100px;
+                font-weight: 600;
+                margin-top: 12px;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(2.2rem, 10vw, 3.2rem);
+            }
+            .hero-stats {
+                gap: 24px;
+                flex-wrap: wrap;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dash-sidebar {
+                width: 220px;
+                transform: translateX(-100%);
+            }
+            .dash-sidebar.open {
+                transform: translateX(0);
+            }
+            .dash-main {
+                margin-left: 0;
+                padding: 20px 16px 40px;
+            }
+            .dash-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer .container {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .footer .bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-card {
+                padding: 24px;
+            }
+            .search-card .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-item .faq-question {
+                font-size: 0.9rem;
+                padding: 14px 18px;
+            }
+
+            .dash-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dash-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .hero-actions .btn-hero-primary,
+            .hero-actions .btn-hero-secondary {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+            .package-card .pkg-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .package-card .pkg-footer .pkg-actions {
+                flex-wrap: wrap;
+            }
+            .package-card .pkg-footer .pkg-actions .btn-sm {
+                flex: 1;
+                text-align: center;
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    PUBLIC WEBSITE
+    ============================================================ -->
+    <div id="publicSite">
+
+        <!-- NAVBAR -->
+        <nav class="navbar" id="navbar">
+            <div class="container">
+                <a href="#" class="nav-logo" onclick="showPublic()">
+                    <span class="logo-icon"><i class="fas fa-mosque"></i></span>
+                    Nur<span>Travel</span>
+                </a>
+
+                <div class="nav-links">
+                    <a href="#packages">Umrah Packages</a>
+                    <a href="#services">Services</a>
+                    <a href="#about">About</a>
+                    <a href="#how">How It Works</a>
+                    <a href="#faq">FAQs</a>
+                    <a href="#contact">Contact</a>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="btn-signin" onclick="showAuthModal('signin')"><i class="fas fa-user"></i> Sign In</button>
+                    <button class="btn-nav-cta" onclick="showAuthModal('signin')">Plan Your Umrah</button>
+                    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#packages" onclick="closeMobile()">Umrah Packages</a>
+            <a href="#services" onclick="closeMobile()">Services</a>
+            <a href="#about" onclick="closeMobile()">About</a>
+            <a href="#how" onclick="closeMobile()">How It Works</a>
+            <a href="#faq" onclick="closeMobile()">FAQs</a>
+            <a href="#contact" onclick="closeMobile()">Contact</a>
+            <button class="btn-mobile-cta" onclick="showAuthModal('signin'); closeMobile();">Plan Your Umrah</button>
+        </div>
+
+        <!-- HERO -->
+        <section class="hero" id="home">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <span class="badge"><i class="fas fa-star" style="color:var(--gold);margin-right:6px;"></i> Your Trusted Umrah Partner</span>
+                    <h1>Your Umrah Journey, <br /><span>Planned with Care</span></h1>
+                    <p>
+                        From flights and hotels to transportation between Makkah and Madinah,
+                        we help you focus on what matters most — your spiritual journey.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn-hero-primary" onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'})">
+                            <i class="fas fa-kaaba"></i> Explore Umrah Packages
+                        </button>
+                        <button class="btn-hero-secondary" onclick="showAuthModal('signin')">
+                            <i class="fas fa-compass"></i> Plan Your Journey
+                        </button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="num">100+</span>
+                            <span class="label">Umrah Packages</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="num">50+</span>
+                            <span class="label">Hotels in Makkah &amp; Madinah</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="num">24/7</span>
+                            <span class="label">Customer Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST SECTION -->
+        <section class="trust-section">
+            <div class="container">
+                <div class="trust-grid">
+                    <div class="trust-card"><div class="icon"><i class="fas fa-hand-holding-heart"></i></div><h4>Trusted Umrah Specialists</h4><p>Experienced and compassionate</p></div>
+                    <div class="trust-card"><div class="icon"><i class="fas fa-sliders-h"></i></div><h4>Flexible Package Options</h4><p>Economy to premium</p></div>
+                    <div class="trust-card"><div class="icon"><i class="fas fa-hotel"></i></div><h4>Carefully Selected Hotels</h4><p>Comfort near the Haram</p></div>
+                    <div class="trust-card"><div class="icon"><i class="fas fa-plane"></i></div><h4>Flight &amp; Transport Assistance</h4><p>Seamless travel logistics</p></div>
+                    <div class="trust-card"><div class="icon"><i class="fas fa-headset"></i></div><h4>Dedicated Customer Support</h4><p>We're here for you</p></div>
+                    <div class="trust-card"><div class="icon"><i class="fas fa-users"></i></div><h4>Family-Friendly Options</h4><p>Travel with peace of mind</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PACKAGES -->
+        <section class="packages-section" id="packages">
+            <div class="container">
+                <div class="packages-header">
+                    <span class="section-label"><i class="fas fa-kaaba" style="margin-right:6px;"></i> Our Packages</span>
+                    <h2 class="section-title">Umrah Packages <span>for Every Need</span></h2>
+                    <p class="section-sub">Choose from our carefully curated packages, designed to make your Umrah experience comfortable and spiritually fulfilling.</p>
+                </div>
+
+                <div class="packages-filters">
+                    <button class="active" data-filter="all">All</button>
+                    <button data-filter="economy">Economy</button>
+                    <button data-filter="standard">Standard</button>
+                    <button data-filter="premium">Premium</button>
+                    <button data-filter="family">Family</button>
+                    <button data-filter="custom">Custom</button>
+                </div>
+
+                <div class="packages-grid" id="packagesGrid">
+                    <!-- cards injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- WHAT'S INCLUDED -->
+        <section class="included-section" id="services">
+            <div class="container">
+                <div class="text-center">
+                    <span class="section-label"><i class="fas fa-check-circle"></i> What's Included</span>
+                    <h2 class="section-title">Everything You Need <span>for a Peaceful Journey</span></h2>
+                    <p class="section-sub mx-auto">We take care of the logistics so you can focus on your worship and spiritual reflection.</p>
+                </div>
+                <div class="included-grid">
+                    <div class="included-card"><div class="icon"><i class="fas fa-plane"></i></div><h4>Flights</h4><p>We'll help arrange your flights from your home country to Saudi Arabia.</p></div>
+                    <div class="included-card"><div class="icon"><i class="fas fa-kaaba"></i></div><h4>Umrah Packages</h4><p>Complete packages with hotels, transport, and visa assistance.</p></div>
+                    <div class="included-card"><div class="icon"><i class="fas fa-hotel"></i></div><h4>Hotels in Makkah</h4><p>Comfortable stays close to Masjid al-Haram with excellent service.</p></div>
+                    <div class="included-card"><div class="icon"><i class="fas fa-mosque"></i></div><h4>Hotels in Madinah</h4><p>Peaceful accommodations near the Prophet's Mosque.</p></div>
+                    <div class="included-card"><div class="icon"><i class="fas fa-bus"></i></div><h4>Transportation</h4><p>We'll arrange transport between the airport, hotels, Makkah, and Madinah.</p></div>
+                    <div class="included-card"><div class="icon"><i class="fas fa-passport"></i></div><h4>Visa Assistance</h4><p>Guidance on visa applications and required documentation.</p></div>
+                    <div class="included-card"><div class="icon"><i class="fas fa-headset"></i></div><h4>Travel Support</h4><p>24/7 support before, during, and after your journey.</p></div>
+                    <div class="included-card"><div class="icon"><i class="fas fa-users"></i></div><h4>Family Packages</h4><p>Special packages designed for families traveling together.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="how-section" id="how">
+            <div class="container">
+                <div class="text-center">
+                    <span class="section-label"><i class="fas fa-route"></i> How It Works</span>
+                    <h2 class="section-title">Plan Your Umrah in <span>Four Simple Steps</span></h2>
+                </div>
+                <div class="how-grid">
+                    <div class="how-step"><div class="step-num">1</div><h4>Choose Your Package</h4><p>Browse our packages and select the one that fits your needs and budget.</p></div>
+                    <div class="how-step"><div class="step-num">2</div><h4>Submit Your Details</h4><p>Fill in your travel details and any special requirements you may have.</p></div>
+                    <div class="how-step"><div class="step-num">3</div><h4>Confirm Your Plans</h4><p>Review and confirm your itinerary, flights, and hotel bookings.</p></div>
+                    <div class="how-step"><div class="step-num">4</div><h4>Begin Your Umrah</h4><p>Travel with peace of mind — we'll be with you every step of the way.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE US -->
+        <section class="why-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <span class="section-label"><i class="fas fa-heart"></i> Why Choose Us</span>
+                    <h2 class="section-title">A Journey <span>You Can Trust</span></h2>
+                </div>
+                <div class="why-grid">
+                    <div class="why-item"><div class="icon"><i class="fas fa-user-check"></i></div><div><h4>Personalized Assistance</h4><p>We take time to understand your needs and help you find the right package.</p></div></div>
+                    <div class="why-item"><div class="icon"><i class="fas fa-clipboard-list"></i></div><div><h4>Clear Package Details</h4><p>No hidden fees — everything is transparent and clearly explained.</p></div></div>
+                    <div class="why-item"><div class="icon"><i class="fas fa-calendar-alt"></i></div><div><h4>Flexible Travel Options</h4><p>We work with your schedule and can adjust packages to suit your needs.</p></div></div>
+                    <div class="why-item"><div class="icon"><i class="fas fa-hands-helping"></i></div><div><h4>Support Before &amp; During</h4><p>From booking to your return home, we're here to assist you.</p></div></div>
+                    <div class="why-item"><div class="icon"><i class="fas fa-star"></i></div><div><h4>Carefully Selected Accommodations</h4><p>Hotels chosen for comfort, proximity, and quality of service.</p></div></div>
+                    <div class="why-item"><div class="icon"><i class="fas fa-family"></i></div><div><h4>Family &amp; Group Travel Support</h4><p>Special arrangements for families and groups traveling together.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAKKAH & MADINAH -->
+        <section class="cities-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <span class="section-label"><i class="fas fa-mosque"></i> The Holy Cities</span>
+                    <h2 class="section-title">Makkah &amp; <span>Madinah</span></h2>
+                </div>
+                <div class="cities-grid">
+                    <div class="city-card">
+                        <div class="city-img" style="background:linear-gradient(135deg,#1a3a2e,#0f2a20);">
+                            <i class="fas fa-kaaba" style="font-size:5rem;opacity:0.2;"></i>
+                            <span class="city-label">Makkah al-Mukarramah</span>
+                        </div>
+                        <div class="city-body">
+                            <p>Makkah is the holiest city in Islam, home to the Kaaba and Masjid al-Haram. Performing Umrah here is a deeply spiritual experience. We help you stay close to the Haram so you can focus on your worship with ease.</p>
+                        </div>
+                    </div>
+                    <div class="city-card">
+                        <div class="city-img" style="background:linear-gradient(135deg,#1e3d32,#132b22);">
+                            <i class="fas fa-mosque" style="font-size:5rem;opacity:0.2;"></i>
+                            <span class="city-label">Madinah al-Munawwarah</span>
+                        </div>
+                        <div class="city-body">
+                            <p>Madinah is the city of the Prophet ﷺ and home to Masjid an-Nabawi. Visiting Madinah brings a sense of peace and reflection. Our accommodations are selected for comfort and proximity to the Prophet's Mosque.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FLIGHT SEARCH -->
+        <section class="flight-search-section" id="contact">
+            <div class="container">
+                <div class="text-center">
+                    <span class="section-label"><i class="fas fa-search"></i> Plan Your Trip</span>
+                    <h2 class="section-title">Find Your <span>Umrah Package</span></h2>
+                </div>
+                <div class="search-card">
+                    <div class="search-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-plane-departure"></i> Departure</label>
+                            <select><option>London (LHR)</option><option>Manchester (MAN)</option><option>Birmingham (BHX)</option><option>New York (JFK)</option><option>Toronto (YYZ)</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-plane-arrival"></i> Destination</label>
+                            <select><option>Jeddah (JED)</option><option>Madinah (MED)</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar-day"></i> Departure</label>
+                            <input type="date" value="2026-09-15" />
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar-day"></i> Return</label>
+                            <input type="date" value="2026-10-01" />
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Travelers</label>
+                            <select><option>1 Adult</option><option>2 Adults</option><option>2 Adults + 1 Child</option><option>2 Adults + 2 Children</option><option>Family (4+)</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-tag"></i> Package</label>
+                            <select><option>Economy</option><option>Standard</option><option>Premium</option><option>Family</option><option>Custom</option></select>
+                        </div>
+                    </div>
+                    <button class="search-btn" onclick="showAuthModal('signin')"><i class="fas fa-mosque"></i> Find My Package</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="testimonials-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <span class="section-label"><i class="fas fa-quote-left"></i> Testimonials</span>
+                    <h2 class="section-title">What Our <span>Travelers Say</span></h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <blockquote>"Nur Travel made our Umrah journey so easy. From flights to hotels, everything was perfectly arranged. We felt supported at every step."</blockquote>
+                        <div class="author"><div class="avatar">A</div><div><div class="name">Ahmed Khan</div><div class="loc">London, UK</div></div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <blockquote>"The hotel in Makkah was just minutes from the Haram. The transport arrangements were seamless. We are so grateful for the care and attention."</blockquote>
+                        <div class="author"><div class="avatar">F</div><div><div class="name">Fatima Al-Mansouri</div><div class="loc">Dubai, UAE</div></div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <blockquote>"Traveling as a family can be stressful, but Nur Travel made it simple. The children's needs were accommodated, and we had a truly blessed journey."</blockquote>
+                        <div class="author"><div class="avatar">M</div><div><div class="name">Mohammed &amp; Aisha</div><div class="loc">Birmingham, UK</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <div class="text-center">
+                    <span class="section-label"><i class="fas fa-question-circle"></i> FAQ</span>
+                    <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+                </div>
+                <div class="faq-list" id="faqList">
+                    <div class="faq-item active">
+                        <button class="faq-question">What is included in an Umrah package? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>Our Umrah packages typically include flights, hotel accommodation in Makkah and Madinah, transportation between cities, visa assistance, and 24/7 support. Specific inclusions vary by package type.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Do you provide flight arrangements? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>Yes, we arrange flights from your home country to Saudi Arabia. We work with trusted airlines and can accommodate specific flight preferences.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Can I choose my hotel? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>Yes, we offer a selection of hotels in both Makkah and Madinah. You can choose based on your budget, proximity to the Haram, and preferred amenities.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Can I customize my package? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>Absolutely. We offer custom packages tailored to your specific needs, including flight preferences, hotel choices, and special requirements.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Do you offer family packages? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>Yes, we have dedicated family packages with family-friendly hotels, group transportation, and special rates for children.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">How far are the hotels from the Haram? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>We offer hotels at various distances. Our premium options are within walking distance, while economy options may be a short shuttle ride away.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Do you provide transportation between Makkah and Madinah? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>Yes, we arrange comfortable transportation between Makkah and Madinah, including private and group transfer options.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">How do I make changes to my booking? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>You can request changes through your dashboard or by contacting our support team. We'll do our best to accommodate your needs.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer" id="contact">
+            <div class="container">
+                <div class="brand">
+                    <h3>Nur<span>Travel</span></h3>
+                    <p>Helping Muslims around the world plan their Umrah journey with care, trust, and peace of mind.</p>
+                    <div class="socials">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#packages">Umrah Packages</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#faq">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope" style="color:var(--gold);width:20px;"></i> hello@nurtravel.com</li>
+                        <li><i class="fas fa-phone" style="color:var(--gold);width:20px;"></i> +44 20 1234 5678</li>
+                        <li><i class="fas fa-clock" style="color:var(--gold);width:20px;"></i> 24/7 Support Available</li>
+                    </ul>
+                </div>
+                <div class="bottom">
+                    <span>&copy; 2026 Nur Travel. All rights reserved.</span>
+                    <div class="links">
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ============================================================
+    AUTH MODAL
+    ============================================================ -->
+    <div id="authModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(15,51,40,0.6);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;">
+        <div style="background:#fff;border-radius:var(--radius);max-width:440px;width:100%;padding:40px 32px;box-shadow:var(--shadow-lg);position:relative;">
+            <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:20px;font-size:1.4rem;color:var(--text-muted);background:none;border:none;cursor:pointer;"><i class="fas fa-times"></i></button>
+            <div id="authFormContainer">
+                <!-- Sign In Form -->
+                <div id="signinForm">
+                    <h3 style="font-family:var(--font-serif);font-size:1.6rem;font-weight:700;margin-bottom:6px;">Welcome Back</h3>
+                    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:24px;">Sign in to manage your Umrah journey.</p>
+                    <div class="form-group" style="margin-bottom:16px;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label>
+                        <input type="email" placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                    </div>
+                    <div class="form-group" style="margin-bottom:20px;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Password</label>
+                        <input type="password" placeholder="••••••••" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                    </div>
+                    <button onclick="handleSignIn()" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Sign In</button>
+                    <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-muted);">
+                        Don't have an account? <a href="#" onclick="showAuthForm('signup')" style="color:var(--gold);font-weight:600;">Create one</a>
+                    </div>
+                    <div style="margin-top:12px;text-align:center;">
+                        <a href="#" onclick="showAuthForm('reset')" style="font-size:0.85rem;color:var(--text-muted);">Forgot password?</a>
+                    </div>
+                </div>
+                <!-- Sign Up Form -->
+                <div id="signupForm" style="display:none;">
+                    <h3 style="font-family:var(--font-serif);font-size:1.6rem;font-weight:700;margin-bottom:6px;">Create Account</h3>
+                    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:24px;">Start planning your Umrah journey today.</p>
+                    <div class="form-group" style="margin-bottom:14px;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Full Name</label>
+                        <input type="text" placeholder="Ahmed Ali" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                    </div>
+                    <div class="form-group" style="margin-bottom:14px;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label>
+                        <input type="email" placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                    </div>
+                    <div class="form-group" style="margin-bottom:14px;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Phone Number</label>
+                        <input type="tel" placeholder="+44 7700 123456" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                    </div>
+                    <div class="form-group" style="margin-bottom:20px;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Password</label>
+                        <input type="password" placeholder="••••••••" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                    </div>
+                    <button onclick="handleSignUp()" class="btn-gold" style="width:100%;justify-content:center;padding:14px;">Create Account</button>
+                    <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-muted);">
+                        Already have an account? <a href="#" onclick="showAuthForm('signin')" style="color:var(--gold);font-weight:600;">Sign In</a>
+                    </div>
+                </div>
+                <!-- Reset Password -->
+                <div id="resetForm" style="display:none;">
+                    <h3 style="font-family:var(--font-serif);font-size:1.6rem;font-weight:700;margin-bottom:6px;">Reset Password</h3>
+                    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:24px;">We'll send you a link to reset your password.</p>
+                    <div class="form-group" style="margin-bottom:20px;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label>
+                        <input type="email" placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                    </div>
+                    <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Reset Link</button>
+                    <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-muted);">
+                        <a href="#" onclick="showAuthForm('signin')" style="color:var(--gold);font-weight:600;">Back to Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    DASHBOARD
+    ============================================================ -->
+    <div class="dashboard-wrapper" id="dashboardWrapper">
+        <!-- Sidebar -->
+        <aside class="dash-sidebar" id="dashSidebar">
+            <div class="dash-logo">
+                <i class="fas fa-mosque"></i> Nur<span>Travel</span>
+            </div>
+            <nav class="dash-nav">
+                <div class="nav-item active" data-tab="dash-home"><i class="fas fa-home"></i> Dashboard</div>
+                <div class="nav-item" data-tab="dash-trip"><i class="fas fa-map-signs"></i> My Trip</div>
+                <div class="nav-item" data-tab="dash-flights"><i class="fas fa-plane"></i> Flights</div>
+                <div class="nav-item" data-tab="dash-package"><i class="fas fa-kaaba"></i> Umrah Package</div>
+                <div class="nav-item" data-tab="dash-documents"><i class="fas fa-file-alt"></i> Documents</div>
+                <div class="nav-item" data-tab="dash-payments"><i class="fas fa-credit-card"></i> Payments</div>
+                <div class="nav-item" data-tab="dash-messages"><i class="fas fa-envelope"></i> Messages <span class="badge-dot"></span></div>
+                <div class="nav-item" data-tab="dash-support"><i class="fas fa-headset"></i> Support</div>
+                <div class="nav-item" data-tab="dash-settings"><i class="fas fa-cog"></i> Settings</div>
+                <div class="nav-item" style="margin-top:12px;border-top:1px solid rgba(26,77,62,0.06);padding-top:12px;" onclick="handleSignOut()"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+            </nav>
+            <div class="dash-user">
+                <div class="avatar">A</div>
+                <div class="info">
+                    <div class="name">Ahmed Ali</div>
+                    <div class="email">ahmed@example.com</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="dash-main">
+            <!-- Header -->
+            <div class="dash-header">
+                <h2><span id="dashGreeting">Assalamu Alaikum</span>, Ahmed</h2>
+                <div class="dash-actions">
+                    <button class="notif-btn" onclick="toggleNotifications()">
+                        <i class="fas fa-bell"></i>
+                        <span class="notif-dot"></span>
+                    </button>
+                    <button class="btn-primary" style="padding:10px 22px;font-size:0.85rem;" onclick="showPublic()">
+                        <i class="fas fa-globe"></i> Website
+                    </button>
+                </div>
+            </div>
+
+            <!-- ===== DASHBOARD HOME ===== -->
+            <div class="dash-tab active" id="dash-home">
+                <div class="dash-grid">
+                    <div class="dash-card"><div class="icon-bg"><i class="fas fa-calendar-day"></i></div><div class="label">Upcoming Trip</div><div class="value">15 Sep 2026</div><div class="sub">42 days left</div></div>
+                    <div class="dash-card"><div class="icon-bg"><i class="fas fa-kaaba"></i></div><div class="label">Package</div><div class="value">Premium Umrah</div><div class="sub">10 nights · Makkah + Madinah</div></div>
+                    <div class="dash-card"><div class="icon-bg"><i class="fas fa-check-circle"></i></div><div class="label">Booking Status</div><div class="value" style="color:var(--emerald);">Confirmed</div><div class="sub">All arrangements complete</div></div>
+                    <div class="dash-card"><div class="icon-bg"><i class="fas fa-credit-card"></i></div><div class="label">Payment</div><div class="value">£2,850</div><div class="sub">Paid · Balance £0</div></div>
+                </div>
+
+                <div class="timeline">
+                    <h4 style="font-family:var(--font-serif);font-size:1.1rem;font-weight:700;margin-bottom:12px;">Your Journey Timeline</h4>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane-departure"></i></div><div class="tl-content"><div class="tl-title">Departure from London</div><div class="tl-desc">15 Sep 2026 · 10:30 AM · LHR Terminal 3</div><div class="tl-status"><i class="fas fa-check-circle" style="color:var(--emerald);"></i> Confirmed</div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane-arrival"></i></div><div class="tl-content"><div class="tl-title">Arrival in Jeddah</div><div class="tl-desc">16 Sep 2026 · 6:45 AM · King Abdulaziz Airport</div><div class="tl-status"><i class="fas fa-clock" style="color:var(--gold);"></i> Pending</div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-bus"></i></div><div class="tl-content"><div class="tl-title">Transfer to Makkah</div><div class="tl-desc">16 Sep 2026 · 8:00 AM · Private transfer</div><div class="tl-status"><i class="fas fa-clock" style="color:var(--gold);"></i> Pending</div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-hotel"></i></div><div class="tl-content"><div class="tl-title">Makkah Hotel Stay</div><div class="tl-desc">16 – 22 Sep 2026 · Hilton Suites · 5-star</div><div class="tl-status"><i class="fas fa-check-circle" style="color:var(--emerald);"></i> Confirmed</div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-mosque"></i></div><div class="tl-content"><div class="tl-title">Transfer to Madinah</div><div class="tl-desc">22 Sep 2026 · 9:00 AM · Private transfer</div><div class="tl-status"><i class="fas fa-clock" style="color:var(--gold);"></i> Pending</div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-hotel"></i></div><div class="tl-content"><div class="tl-title">Madinah Hotel Stay</div><div class="tl-desc">22 – 26 Sep 2026 · Anwar Al Madinah · 5-star</div><div class="tl-status"><i class="fas fa-check-circle" style="color:var(--emerald);"></i> Confirmed</div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane-departure"></i></div><div class="tl-content"><div class="tl-title">Return Flight to London</div><div class="tl-desc">26 Sep 2026 · 11:00 PM · JED → LHR</div><div class="tl-status"><i class="fas fa-clock" style="color:var(--gold);"></i> Pending</div></div></div>
+                </div>
+            </div>
+
+            <!-- ===== MY TRIP ===== -->
+            <div class="dash-tab" id="dash-trip">
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">My Trip Details</h3>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Full itinerary for your Umrah journey.</p>
+                <div class="timeline">
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-calendar-check"></i></div><div class="tl-content"><div class="tl-title">Trip ID: NUR-2026-001</div><div class="tl-desc">10 nights · 15 – 26 Sep 2026 · Premium Umrah Package</div><div class="tl-status"><span class="badge badge-green"><i class="fas fa-check"></i> Confirmed</span></div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane"></i></div><div class="tl-content"><div class="tl-title">Flight: London → Jeddah</div><div class="tl-desc">Saudi Airlines · SV102 · 15 Sep 2026 · 10:30 AM</div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-hotel"></i></div><div class="tl-content"><div class="tl-title">Makkah: Hilton Suites</div><div class="tl-desc">6 nights · Deluxe Room · 5-star · 5 min to Haram</div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-bus"></i></div><div class="tl-content"><div class="tl-title">Transfer: Makkah → Madinah</div><div class="tl-desc">Private vehicle · 22 Sep 2026 · 9:00 AM</div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-hotel"></i></div><div class="tl-content"><div class="tl-title">Madinah: Anwar Al Madinah</div><div class="tl-desc">4 nights · Premium Room · 5-star · 3 min to Prophet's Mosque</div></div></div>
+                    <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane"></i></div><div class="tl-content"><div class="tl-title">Flight: Jeddah → London</div><div class="tl-desc">Saudi Airlines · SV103 · 26 Sep 2026 · 11:00 PM</div></div></div>
+                </div>
+            </div>
+
+            <!-- ===== FLIGHTS ===== -->
+            <div class="dash-tab" id="dash-flights">
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Flight Information</h3>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Your flight details and status.</p>
+                <div style="background:#fff;border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Airline</span><div style="font-weight:600;font-size:1.1rem;">Saudi Airlines</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Flight Number</span><div style="font-weight:600;font-size:1.1rem;">SV102 / SV103</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Departure</span><div>London (LHR) · 15 Sep 2026 · 10:30 AM</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Arrival</span><div>Jeddah (JED) · 16 Sep 2026 · 6:45 AM</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Terminal</span><div>LHR T3 · JED Terminal 1</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Baggage</span><div>30kg checked · 7kg carry-on</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">PNR</span><div style="font-family:monospace;font-weight:600;">NUR1234ABC</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Status</span><div><span class="badge badge-green"><i class="fas fa-check"></i> Confirmed</span></div></div>
+                    </div>
+                    <div style="display:flex;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(26,77,62,0.06);flex-wrap:wrap;">
+                        <button class="btn-primary" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-eye"></i> View Flight Details</button>
+                        <button class="btn-secondary" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-download"></i> Download Itinerary</button>
+                        <button class="btn-outline-gold" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-headset"></i> Contact Support</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== UMRah PACKAGE ===== -->
+            <div class="dash-tab" id="dash-package">
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Your Umrah Package</h3>
+                <p style="color:var(--text-muted);margin-bottom:20px;">All the details of your selected package.</p>
+                <div style="background:#fff;border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Package Name</span><div style="font-weight:600;font-size:1.1rem;">Premium Umrah Package</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Duration</span><div>10 nights · 15–26 Sep 2026</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Makkah Hotel</span><div>Hilton Suites · 5-star · Deluxe Room</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Madinah Hotel</span><div>Anwar Al Madinah · 5-star · Premium Room</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Room Type</span><div>Double · 2 Adults</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Transportation</span><div>Private transfers included</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Visa</span><div>Assistance provided · Documents ready</div></div>
+                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Status</span><div><span class="badge badge-green"><i class="fas fa-check"></i> Confirmed</span></div></div>
+                    </div>
+                    <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(26,77,62,0.06);display:flex;gap:12px;flex-wrap:wrap;">
+                        <button class="btn-gold" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-file-pdf"></i> Download Package Details</button>
+                        <button class="btn-secondary" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-edit"></i> Request Changes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== DOCUMENTS ===== -->
+            <div class="dash-tab" id="dash-documents">
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Your Documents</h3>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Important travel documents for your journey.</p>
+                <div class="doc-list">
+                    <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Flight Itinerary</div><div class="doc-date">Updated 12 Aug 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
+                    <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Hotel Confirmation - Makkah</div><div class="doc-date">Updated 10 Aug 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
+                    <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Hotel Confirmation - Madinah</div><div class="doc-date">Updated 10 Aug 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
+                    <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Visa Documents</div><div class="doc-date">Updated 5 Aug 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
+                    <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Booking Confirmation</div><div class="doc-date">Updated 1 Aug 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
+                    <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Travel Insurance</div><div class="doc-date">Updated 28 Jul 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
+                </div>
+            </div>
+
+            <!-- ===== PAYMENTS ===== -->
+            <div class="dash-tab" id="dash-payments">
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Payments</h3>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Your payment summary and history.</p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px;">
+                    <div class="dash-card"><div class="label">Total Package Price</div><div class="value">£3,450</div></div>
+                    <div class="dash-card"><div class="label">Amount Paid</div><div class="value" style="color:var(--emerald);">£3,450</div></div>
+                    <div class="dash-card"><div class="label">Remaining Balance</div><div class="value" style="color:var(--text-muted);">£0</div></div>
+                    <div class="dash-card"><div class="label">Payment Due</div><div class="value" style="font-size:1.2rem;">Paid in Full</div></div>
+                </div>
+                <table class="payment-table">
+                    <thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>01 Aug 2026</td><td>Deposit — Premium Umrah Package</td><td>£1,000</td><td><span class="badge badge-green">Paid</span></td></tr>
+                        <tr><td>15 Aug 2026</td><td>Final Payment — Premium Umrah Package</td><td>£2,450</td><td><span class="badge badge-green">Paid</span></td></tr>
+                    </tbody>
+                </table>
+                <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+                    <button class="btn-gold" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-credit-card"></i> Make Payment</button>
+                    <button class="btn-secondary" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-receipt"></i> View Receipt</button>
+                    <button class="btn-secondary" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-download"></i> Download Invoice</button>
+                </div>
+            </div>
+
+            <!-- ===== MESSAGES ===== -->
+            <div class="dash-tab" id="dash-messages">
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Messages</h3>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Conversations with your travel support team.</p>
+                <div style="background:#fff;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);overflow:hidden;">
+                    <div style="padding:16px 20px;border-bottom:1px solid rgba(26,77,62,0.04);display:flex;justify-content:space-between;align-items:center;">
+                        <span style="font-weight:600;">Support Team</span>
+                        <span style="font-size:0.75rem;color:var(--text-muted);">Active now</span>
+                    </div>
+                    <div style="padding:20px;">
+                        <div style="display:flex;gap:12px;margin-bottom:16px;">
+                            <div style="background:var(--emerald);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;flex-shrink:0;">S</div>
+                            <div style="background:var(--cream);padding:12px 16px;border-radius:var(--radius-sm);max-width:75%;"><p style="font-size:0.9rem;color:var(--charcoal);">Assalamu Alaikum Ahmed, your Umrah package has been confirmed. We've sent the documents to your email.</p><span style="font-size:0.7rem;color:var(--text-muted);">10:30 AM</span></div>
+                        </div>
+                        <div style="display:flex;gap:12px;justify-content:flex-end;margin-bottom:16px;">
+                            <div style="background:#e8f0ee;padding:12px 16px;border-radius:var(--radius-sm);max-width:75%;"><p style="font-size:0.9rem;color:var(--charcoal);">Wa alaikum assalam, thank you! I've received the documents. Everything looks good.</p><span style="font-size:0.7rem;color:var(--text-muted);">10:45 AM</span></div>
+                        </div>
+                        <div style="display:flex;gap:12px;margin-bottom:16px;">
+                            <div style="background:var(--emerald);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;flex-shrink:0;">S</div>
+                            <div style="background:var(--cream);padding:12px 16px;border-radius:var(--radius-sm);max-width:75%;"><p style="font-size:0.9rem;color:var(--charcoal);">Excellent! We'll send you a reminder 2 days before your departure with all the final details.</p><span style="font-size:0.7rem;color:var(--text-muted);">11:00 AM</span></div>
+                        </div>
+                    </div>
+                    <div style="padding:16px 20px;border-top:1px solid rgba(26,77,62,0.04);display:flex;gap:12px;">
+                        <input type="text" placeholder="Type your message..." style="flex:1;padding:10px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:100px;font-size:0.9rem;" />
+                        <button class="btn-primary" style="padding:10px 20px;border-radius:100px;font-size:0.85rem;"><i class="fas fa-paper-plane"></i> Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SUPPORT ===== -->
+            <div class="dash-tab" id="dash-support">
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Support Center</h3>
+                <p style="color:var(--text-muted);margin-bottom:20px;">We're here to help you every step of the way.</p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+                    <div class="dash-card" style="text-align:center;cursor:pointer;" onclick="document.getElementById('dash-messages').click();">
+                        <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-comment-dots"></i></div>
+                        <h4 style="margin-top:8px;font-weight:600;">Live Chat</h4>
+                        <p style="font-size:0.85rem;color:var(--text-muted);">Chat with our support team</p>
+                    </div>
+                    <div class="dash-card" style="text-align:center;cursor:pointer;" onclick="window.location.href='mailto:support@nurtravel.com'">
+                        <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-envelope"></i></div>
+                        <h4 style="margin-top:8px;font-weight:600;">Email Us</h4>
+                        <p style="font-size:0.85rem;color:var(--text-muted);">support@nurtravel.com</p>
+                    </div>
+                    <div class="dash-card" style="text-align:center;cursor:pointer;" onclick="window.location.href='tel:+442012345678'">
+                        <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-phone"></i></div>
+                        <h4 style="margin-top:8px;font-weight:600;">Call Us</h4>
+                        <p style="font-size:0.85rem;color:var(--text-muted);">+44 20 1234 5678</p>
+                    </div>
+                    <div class="dash-card" style="text-align:center;" onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth'});showPublic();">
+                        <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-question-circle"></i></div>
+                        <h4 style="margin-top:8px;font-weight:600;">FAQs</h4>
+                        <p style="font-size:0.85rem;color:var(--text-muted);">Find answers quickly</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SETTINGS ===== -->
+            <div class="dash-tab" id="dash-settings">
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Account Settings</h3>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Manage your profile and preferences.</p>
+                <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Full Name</label><input type="text" value="Ahmed Ali" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label><input type="email" value="ahmed@example.com" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Phone Number</label><input type="tel" value="+44 7700 123456" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Language</label><select style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;"><option>English</option><option>Arabic</option><option>Urdu</option></select></div>
+                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">New Password</label><input type="password" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Confirm Password</label><input type="password" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                    </div>
+                    <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+                        <button class="btn-primary" style="padding:10px 28px;font-size:0.85rem;"><i class="fas fa-save"></i> Save Changes</button>
+                        <button class="btn-secondary" style="padding:10px 28px;font-size:0.85rem;border-color:#e74c3c;color:#e74c3c;"><i class="fas fa-trash"></i> Delete Account</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ============================================================
+        // DATA
+        // ============================================================
+        const packagesData = [{
+            id: 1,
+            name: 'Economy Umrah Package',
+            category: 'economy',
+            nights: '8 nights',
+            makkah: 'Al Safwah Hotel',
+            madinah: 'Al Eiman Royal',
+            stars: 3,
+            distance: '15 min to Haram',
+            flight: 'Economy class included',
+            transport: 'Group transfers',
+            includes: ['Flights', 'Hotels', 'Group transfers', 'Visa assistance'],
+            excludes: ['Meals', 'Extra luggage'],
+            price: '£1,450',
+        }, {
+            id: 2,
+            name: 'Standard Umrah Package',
+            category: 'standard',
+            nights: '10 nights',
+            makkah: 'Makkah Tower Hotel',
+            madinah: 'Al Majeedi Hotel',
+            stars: 4,
+            distance: '8 min to Haram',
+            flight: 'Economy class included',
+            transport: 'Private transfers',
+            includes: ['Flights', 'Hotels', 'Private transfers', 'Visa assistance', 'Breakfast'],
+            excludes: ['Lunch & dinner', 'Sightseeing tours'],
+            price: '£2,150',
+        }, {
+            id: 3,
+            name: 'Premium Umrah Package',
+            category: 'premium',
+            nights: '10 nights',
+            makkah: 'Hilton Suites',
+            madinah: 'Anwar Al Madinah',
+            stars: 5,
+            distance: '5 min to Haram',
+            flight: 'Business class upgrade available',
+            transport: 'Private luxury transfers',
+            includes: ['Flights', 'Luxury hotels', 'Private transfers', 'Visa assistance', 'All meals', 'VIP support'],
+            excludes: ['Personal expenses', 'Extra tours'],
+            price: '£3,450',
+        }, {
+            id: 4,
+            name: 'Family Umrah Package',
+            category: 'family',
+            nights: '12 nights',
+            makkah: 'Family Suite Hotel',
+            madinah: 'Family Hotel Madinah',
+            stars: 4,
+            distance: '10 min to Haram',
+            flight: 'Economy class included',
+            transport: 'Private family minivan',
+            includes: ['Flights', 'Family rooms', 'Private transfers', 'Visa assistance', 'Kids meals', 'Family support'],
+            excludes: ['Extra activities', 'Personal shopping'],
+            price: '£4,200',
+        }, {
+            id: 5,
+            name: 'Custom Umrah Package',
+            category: 'custom',
+            nights: 'Flexible',
+            makkah: 'Your choice',
+            madinah: 'Your choice',
+            stars: 'Your choice',
+            distance: 'Your preference',
+            flight: 'Your choice',
+            transport: 'Your choice',
+            includes: ['Fully customized', 'Your preferred hotels', 'Flexible transport', 'Visa assistance', 'Dedicated support'],
+            excludes: ['Tailored to your needs'],
+            price: 'Custom quote',
+        }, ];
+
+        // ============================================================
+        // RENDER PACKAGES
+        // ============================================================
+        function renderPackages(filter = 'all') {
+            const grid = document.getElementById('packagesGrid');
+            const filtered = filter === 'all' ? packagesData : packagesData.filter(p => p.category === filter);
+            grid.innerHTML = filtered.map(p => `
+                    <div class="package-card">
+                        <div class="pkg-header">
+                            <div class="pkg-name">${p.name}</div>
+                            <div class="pkg-stars">${'★'.repeat(p.stars)}${p.stars !== 'Your choice' ? '' : ' · Custom'}</div>
+                        </div>
+                        <div class="pkg-body">
+                            <div class="pkg-meta">
+                                <span><i class="fas fa-moon"></i> ${p.nights}</span>
+                                <span><i class="fas fa-hotel"></i> ${p.makkah} · ${p.madinah}</span>
+                                <span><i class="fas fa-map-marker-alt"></i> ${p.distance}</span>
+                                <span><i class="fas fa-plane"></i> ${p.flight}</span>
+                                <span><i class="fas fa-bus"></i> ${p.transport}</span>
+                            </div>
+                        </div>
+                        <div class="pkg-footer">
+                            <div class="price">${p.price} <small>per person</small></div>
+                            <div class="pkg-actions">
+                                <button class="btn-sm btn-sm-outline" onclick="showPackageDetail(${p.id})">View</button>
+                                <button class="btn-sm btn-sm-gold" onclick="showAuthModal('signin')">Book</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+        }
+
+        function showPackageDetail(id) {
+            const p = packagesData.find(p => p.id === id);
+            if (!p) return;
+            alert(
+                `📋 ${p.name}\nNights: ${p.nights}\nMakkah: ${p.makkah}\nMadinah: ${p.madinah}\nStars: ${p.stars}\nDistance: ${p.distance}\nFlight: ${p.flight}\nTransport: ${p.transport}\nPrice: ${p.price}\n\nIncludes: ${p.includes.join(', ')}\nExcludes: ${p.excludes.join(', ')}`
+                );
+        }
+
+        // ============================================================
+        // FILTER PACKAGES
+        // ============================================================
+        document.querySelectorAll('.packages-filters button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.packages-filters button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderPackages(this.dataset.filter);
+            });
+        });
+
+        // ============================================================
+        // FAQ ACCORDION
+        // ============================================================
+        document.querySelectorAll('.faq-item .faq-question').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const item = this.parentElement;
+                const wasActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+                if (!wasActive) item.classList.add('active');
+            });
+        });
+
+        // ============================================================
+        // NAVBAR SCROLL
+        // ============================================================
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 60) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // ============================================================
+        // MOBILE MENU
+        // ============================================================
+        const navToggle = document.getElementById('navToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        navToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        function closeMobile() {
+            navToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ============================================================
+        // AUTH MODAL
+        // ============================================================
+        let authCallback = null;
+
+        function showAuthModal(mode = 'signin') {
+            document.getElementById('authModal').style.display = 'flex';
+            showAuthForm(mode);
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').style.display = 'none';
+        }
+
+        function showAuthForm(mode) {
+            document.getElementById('signinForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('resetForm').style.display = 'none';
+            if (mode === 'signin') document.getElementById('signinForm').style.display = 'block';
+            else if (mode === 'signup') document.getElementById('signupForm').style.display = 'block';
+            else if (mode === 'reset') document.getElementById('resetForm').style.display = 'block';
+        }
+
+        function handleSignIn() {
+            // Demo: just sign in
+            closeAuthModal();
+            showDashboard();
+        }
+
+        function handleSignUp() {
+            closeAuthModal();
+            showDashboard();
+        }
+
+        // ============================================================
+        // DASHBOARD
+        // ============================================================
+        function showDashboard() {
+            document.getElementById('publicSite').style.display = 'none';
+            document.getElementById('dashboardWrapper').classList.add('active');
+            document.querySelector('body').style.overflow = 'auto';
+            // Set greeting based on time
+            const hour = new Date().getHours();
+            let greeting = 'Assalamu Alaikum';
+            if (hour < 12) greeting = 'Sabah al-Khair';
+            else if (hour < 18) greeting = 'Assalamu Alaikum';
+            else greeting = 'Masa al-Khair';
+            document.getElementById('dashGreeting').textContent = greeting;
+        }
+
+        function showPublic() {
+            document.getElementById('publicSite').style.display = 'block';
+            document.getElementById('dashboardWrapper').classList.remove('active');
+            document.querySelector('body').style.overflow = 'auto';
+            closeAuthModal();
+            // Close mobile menu if open
+            closeMobile();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleSignOut() {
+            if (confirm('Are you sure you want to sign out?')) {
+                showPublic();
+            }
+        }
+
+        // ============================================================
+        // DASHBOARD NAVIGATION
+        // ============================================================
+        document.querySelectorAll('.dash-nav .nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                if (!tabId) return;
+                document.querySelectorAll('.dash-nav .nav-item').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.dash-tab').forEach(el => el.classList.remove('active'));
+                const target = document.getElementById(tabId);
+                if (target) target.classList.add('active');
+                // Close sidebar on mobile
+                if (window.innerWidth <= 768) {
+                    document.getElementById('dashSidebar').classList.remove('open');
+                }
+            });
+        });
+
+        // ============================================================
+        // NOTIFICATIONS
+        // ============================================================
+        function toggleNotifications() {
+            alert('📬 You have 2 unread notifications:\n\n1. Your flight has been confirmed.\n2. Payment received — thank you!');
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        renderPackages('all');
+
+        // Auto-show dashboard if user is "signed in" — for demo we start on public
+        console.log('🌙 Nur Travel — Your Umrah Journey Awaits.');
+
+        // Clicking on dashboard tabs in mobile should close sidebar
+        document.querySelectorAll('.dash-nav .nav-item').forEach(el => {
+            el.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    document.getElementById('dashSidebar').classList.remove('open');
+                }
+            });
+        });
+
+        // Toggle sidebar on mobile via a small overlay or tap — we'll add a simple toggle button inside the main header
+        // Add a hamburger in dashboard header for mobile
+        const dashHeader = document.querySelector('.dash-header');
+        const toggleBtn = document.createElement('button');
+        toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        toggleBtn.style.cssText =
+            'display:none;background:none;border:none;font-size:1.4rem;color:var(--charcoal);padding:4px 8px;';
+        toggleBtn.onclick = function() {
+            document.getElementById('dashSidebar').classList.toggle('open');
+        };
+        dashHeader.prepend(toggleBtn);
+
+        // Show toggle on mobile
+        function handleDashToggleVisibility() {
+            if (window.innerWidth <= 768) {
+                toggleBtn.style.display = 'block';
+            } else {
+                toggleBtn.style.display = 'none';
+                document.getElementById('dashSidebar').classList.remove('open');
+            }
+        }
+        window.addEventListener('resize', handleDashToggleVisibility);
+        handleDashToggleVisibility();
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('dashSidebar');
+            const toggle = toggleBtn;
+            if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+
+        console.log('✅ Nur Travel ready.');
+    </script>
+
+</body>
+</html>
