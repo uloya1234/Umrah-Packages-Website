@@ -1614,7 +1614,7 @@
             border-bottom: none;
         }
 
-        /* ===== SETTINGS ===== */
+        /* ===== SETTINGS (enhanced) ===== */
         .settings-nav {
             display: flex;
             gap: 8px;
@@ -1694,7 +1694,7 @@
             left: 22px;
         }
 
-        /* ===== NOOR AI CHAT ===== */
+        /* ===== CHAT (Noor AI) ===== */
         .chat-container {
             background: #fff;
             border-radius: var(--radius-sm);
@@ -1949,6 +1949,7 @@
     </style>
 </head>
 <body>
+
     <!-- ============================================================
     PUBLIC WEBSITE
     ============================================================ -->
@@ -2322,7 +2323,7 @@
                         <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Password</label>
                         <input type="password" id="signinPassword" placeholder="••••••••" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
                     </div>
-                    <button onclick="handleSignIn()" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Sign In</button>
+                    <button id="signInBtn" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Sign In</button>
                     <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-muted);">
                         Don't have an account? <a href="#" onclick="showAuthForm('signup')" style="color:var(--gold);font-weight:600;">Create one</a>
                     </div>
@@ -2350,7 +2351,7 @@
                         <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Password</label>
                         <input type="password" id="signupPassword" placeholder="••••••••" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
                     </div>
-                    <button onclick="handleSignUp()" class="btn-gold" style="width:100%;justify-content:center;padding:14px;">Create Account</button>
+                    <button id="signUpBtn" class="btn-gold" style="width:100%;justify-content:center;padding:14px;">Create Account</button>
                     <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-muted);">
                         Already have an account? <a href="#" onclick="showAuthForm('signin')" style="color:var(--gold);font-weight:600;">Sign In</a>
                     </div>
@@ -2363,7 +2364,7 @@
                         <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label>
                         <input type="email" id="resetEmail" placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
                     </div>
-                    <button onclick="handleResetPassword()" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Reset Link</button>
+                    <button id="resetBtn" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Reset Link</button>
                     <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-muted);">
                         <a href="#" onclick="showAuthForm('signin')" style="color:var(--gold);font-weight:600;">Back to Sign In</a>
                     </div>
@@ -2622,7 +2623,7 @@
                 </div>
             </div>
 
-            <!-- ===== SETTINGS ===== -->
+            <!-- ===== SETTINGS (Enhanced) ===== -->
             <div class="dash-tab" id="dash-settings">
                 <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Account Settings</h3>
                 <p style="color:var(--text-muted);margin-bottom:20px;">Manage your profile, security, and preferences.</p>
