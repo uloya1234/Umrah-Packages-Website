@@ -4,7 +4,8 @@
 const SUPABASE_URL = 'https://idosxouzulookidzikxh.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_RoWVD_wik-DnpBVckZAe8g_JoLjlzWq';
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+// Use the global 'supabase' from the CDN to create a client instance
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
 // ============================================================
 // DOM References
@@ -40,12 +41,12 @@ const toast = document.getElementById('toast');
 const toastMessage = document.getElementById('toastMessage');
 
 // ============================================================
-// Auth Functions
+// Auth Functions with detailed logging
 // ============================================================
 async function handleSignUp() {
-    const name = document.getElementById('signupName').value;
-    const email = document.getElementById('signupEmail').value;
-    const phone = document.getElementById('signupPhone').value;
+    const name = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const phone = document.getElementById('signupPhone').value.trim();
     const password = document.getElementById('signupPassword').value;
 
     if (!name || !email || !password) {
@@ -53,7 +54,9 @@ async function handleSignUp() {
         return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
+    console.log('Signing up with email:', email);
+
+    const { data, error } = await supabaseClient.auth.signUp({
         email,
         password,
         options: {
@@ -62,15 +65,17 @@ async function handleSignUp() {
     });
 
     if (error) {
+        console.error('Sign-up error:', error);
         showToast('Error: ' + error.message);
     } else {
+        console.log('Sign-up successful, check email for confirmation:', data);
         showToast('Account created! Please check your email to confirm.');
         closeAuthModal();
     }
 }
 
 async function handleSignIn() {
-    const email = document.getElementById('signinEmail').value;
+    const email = document.getElementById('signinEmail').value.trim();
     const password = document.getElementById('signinPassword').value;
 
     if (!email || !password) {
@@ -78,24 +83,35 @@ async function handleSignIn() {
         return;
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    console.log('Attempting sign-in with email:', email);
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
 
     if (error) {
-        showToast('Error: ' + error.message);
+        console.error('Sign-in error:', error);
+        let msg = error.message;
+        if (error.message.includes('Email not confirmed')) {
+            msg = 'Please confirm your email address first. Check your inbox for the confirmation link.';
+        } else if (error.message.includes('Invalid login credentials')) {
+            msg = 'Incorrect email or password. Please try again.';
+        }
+        showToast('Error: ' + msg);
     } else {
+        console.log('Sign-in successful:', data);
         closeAuthModal();
         showDashboard();
     }
 }
 
 async function handleResetPassword() {
-    const email = document.getElementById('resetEmail').value;
+    const email = document.getElementById('resetEmail').value.trim();
     if (!email) {
         showToast('Please enter your email.');
         return;
     }
-    const { error } = await supabase.auth.resetPasswordForEmail(email);
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email);
     if (error) {
+        console.error('Reset error:', error);
         showToast('Error: ' + error.message);
     } else {
         showToast('Password reset link sent to your email.');
@@ -104,8 +120,9 @@ async function handleResetPassword() {
 }
 
 async function signOut() {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await supabaseClient.auth.signOut();
     if (error) {
+        console.error('Sign-out error:', error);
         showToast('Error signing out: ' + error.message);
     } else {
         showPublic();
@@ -116,11 +133,13 @@ async function signOut() {
 // Session Management
 // ============================================================
 async function checkSession() {
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await supabaseClient.auth.getSession();
     if (session) {
+        console.log('Active session found, showing dashboard.');
         showDashboard();
         updateUserInfo(session.user);
     } else {
+        console.log('No active session.');
         showPublic();
     }
 }
@@ -132,7 +151,6 @@ function updateUserInfo(user) {
     dashUserAvatar.textContent = name.charAt(0).toUpperCase();
     dashGreetingName.textContent = name;
 
-    // Update settings fields
     settingsFullName.value = name;
     settingsEmail.value = user.email;
     settingsPhone.value = user.user_metadata?.phone || '';
@@ -197,6 +215,7 @@ const packagesData = [
 
 function renderPackages(filter = 'all') {
     const grid = document.getElementById('packagesGrid');
+    if (!grid) return;
     const filtered = filter === 'all' ? packagesData : packagesData.filter(p => p.category === filter);
     grid.innerHTML = filtered.map(p => `
         <div class="package-card animated-border">
@@ -280,21 +299,23 @@ function activateSettingsPane(paneId) {
 // ============================================================
 const notifToggle = document.getElementById('notifToggle');
 const notifDropdown = document.getElementById('notifDropdown');
-notifToggle.addEventListener('click', function(e) {
-    e.stopPropagation();
-    notifDropdown.classList.toggle('active');
-});
-document.addEventListener('click', function(e) {
-    if (!notifToggle.contains(e.target) && !notifDropdown.contains(e.target)) {
+if (notifToggle && notifDropdown) {
+    notifToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        notifDropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', function(e) {
+        if (!notifToggle.contains(e.target) && !notifDropdown.contains(e.target)) {
+            notifDropdown.classList.remove('active');
+        }
+    });
+    document.getElementById('markAllRead')?.addEventListener('click', function() {
+        document.querySelectorAll('.notif-item.unread').forEach(el => el.classList.remove('unread'));
+        document.querySelector('.notif-dot').style.display = 'none';
+        showToast('All notifications marked as read.');
         notifDropdown.classList.remove('active');
-    }
-});
-document.getElementById('markAllRead').addEventListener('click', function() {
-    document.querySelectorAll('.notif-item.unread').forEach(el => el.classList.remove('unread'));
-    document.querySelector('.notif-dot').style.display = 'none';
-    showToast('All notifications marked as read.');
-    notifDropdown.classList.remove('active');
-});
+    });
+}
 
 // ============================================================
 // Sidebar Toggle (mobile)
@@ -304,14 +325,14 @@ const toggleBtn = document.createElement('button');
 toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
 toggleBtn.style.cssText = 'display:none;background:none;border:none;font-size:1.4rem;color:var(--charcoal);padding:4px 8px;';
 toggleBtn.onclick = function() { document.getElementById('dashSidebar').classList.toggle('open'); };
-dashHeader.prepend(toggleBtn);
+if (dashHeader) dashHeader.prepend(toggleBtn);
 
 function handleDashToggleVisibility() {
     if (window.innerWidth <= 768) {
         toggleBtn.style.display = 'block';
     } else {
         toggleBtn.style.display = 'none';
-        document.getElementById('dashSidebar').classList.remove('open');
+        document.getElementById('dashSidebar')?.classList.remove('open');
     }
 }
 window.addEventListener('resize', handleDashToggleVisibility);
@@ -319,7 +340,7 @@ handleDashToggleVisibility();
 
 document.addEventListener('click', function(e) {
     const sidebar = document.getElementById('dashSidebar');
-    if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+    if (window.innerWidth <= 768 && sidebar?.classList.contains('open')) {
         if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
             sidebar.classList.remove('open');
         }
@@ -343,51 +364,55 @@ document.querySelectorAll('.faq-item .faq-question').forEach(btn => {
 // ============================================================
 window.addEventListener('scroll', function() {
     const nav = document.getElementById('navbar');
-    if (window.scrollY > 60) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
+    if (nav) {
+        if (window.scrollY > 60) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    }
 });
 
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', function() {
-    this.classList.toggle('active');
-    navLinks.classList.toggle('open');
-    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
-});
-document.querySelectorAll('#navLinks a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        navToggle.classList.remove('active');
-        document.body.style.overflow = '';
+if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navLinks.classList.toggle('open');
+        document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     });
-});
+    document.querySelectorAll('#navLinks a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+}
 
 // ============================================================
 // Public Buttons -> Show Auth Modal
 // ============================================================
-document.getElementById('publicSignInBtn').addEventListener('click', () => showAuthModal('signin'));
-document.getElementById('publicPlanBtn').addEventListener('click', () => showAuthModal('signin'));
-document.getElementById('heroPlanBtn').addEventListener('click', () => showAuthModal('signin'));
-document.getElementById('searchFindBtn').addEventListener('click', () => showAuthModal('signin'));
-document.getElementById('goToWebsiteBtn').addEventListener('click', showPublic);
-document.getElementById('signOutBtn').addEventListener('click', signOut);
+document.getElementById('publicSignInBtn')?.addEventListener('click', () => showAuthModal('signin'));
+document.getElementById('publicPlanBtn')?.addEventListener('click', () => showAuthModal('signin'));
+document.getElementById('heroPlanBtn')?.addEventListener('click', () => showAuthModal('signin'));
+document.getElementById('searchFindBtn')?.addEventListener('click', () => showAuthModal('signin'));
+document.getElementById('goToWebsiteBtn')?.addEventListener('click', showPublic);
+document.getElementById('signOutBtn')?.addEventListener('click', signOut);
 
 // ============================================================
 // Auth Buttons (using addEventListener)
 // ============================================================
-document.getElementById('signInBtn').addEventListener('click', handleSignIn);
-document.getElementById('signUpBtn').addEventListener('click', handleSignUp);
-document.getElementById('resetBtn').addEventListener('click', handleResetPassword);
+document.getElementById('signInBtn')?.addEventListener('click', handleSignIn);
+document.getElementById('signUpBtn')?.addEventListener('click', handleSignUp);
+document.getElementById('resetBtn')?.addEventListener('click', handleResetPassword);
 
 // ============================================================
 // Settings: Save Profile
 // ============================================================
-document.getElementById('saveProfileBtn').addEventListener('click', async function() {
+document.getElementById('saveProfileBtn')?.addEventListener('click', async function() {
     const fullName = settingsFullName.value;
     const phone = settingsPhone.value;
     const language = settingsLanguage.value;
 
-    const { data, error } = await supabase.auth.updateUser({
+    const { data, error } = await supabaseClient.auth.updateUser({
         data: { full_name: fullName, phone: phone, language: language }
     });
 
@@ -405,7 +430,7 @@ document.getElementById('saveProfileBtn').addEventListener('click', async functi
 // ============================================================
 // Settings: Update Password
 // ============================================================
-document.getElementById('updatePasswordBtn').addEventListener('click', async function() {
+document.getElementById('updatePasswordBtn')?.addEventListener('click', async function() {
     const current = document.getElementById('currentPassword').value;
     const newPass = document.getElementById('newPassword').value;
     const confirm = document.getElementById('confirmPassword').value;
@@ -419,7 +444,7 @@ document.getElementById('updatePasswordBtn').addEventListener('click', async fun
         return;
     }
 
-    const { data, error } = await supabase.auth.updateUser({ password: newPass });
+    const { data, error } = await supabaseClient.auth.updateUser({ password: newPass });
 
     if (error) {
         showToast('Error updating password: ' + error.message);
@@ -473,8 +498,8 @@ function appendMessage(role, content) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-sendChatBtn.addEventListener('click', sendMessage);
-chatInput.addEventListener('keydown', function(e) {
+sendChatBtn?.addEventListener('click', sendMessage);
+chatInput?.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') sendMessage();
 });
 
@@ -496,7 +521,7 @@ renderPackages('all');
 checkSession();
 
 // Listen for auth changes
-supabase.auth.onAuthStateChange((event, session) => {
+supabaseClient.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_OUT') {
         showPublic();
     } else if (event === 'SIGNED_IN' && session) {
