@@ -75,6 +75,7 @@ async function handleSignUp() {
 }
 
 async function handleSignIn() {
+    console.log('🔵 Sign-in button clicked!');
     const email = document.getElementById('signinEmail').value.trim();
     const password = document.getElementById('signinPassword').value;
 
@@ -192,10 +193,39 @@ function showAuthForm(mode) {
     else if (mode === 'reset') resetForm.style.display = 'block';
 }
 
-// ====== This is the function that was "not defined" – it's here! ======
 function showAuthModal(mode = 'signin') {
     authModal.style.display = 'flex';
     showAuthForm(mode);
+}
+
+// ============================================================
+// Email Confirmation Handler
+// ============================================================
+async function handleEmailConfirmation() {
+    const hash = window.location.hash;
+    if (hash && hash.includes('access_token')) {
+        // Supabase sends the token as #access_token=...
+        const params = new URLSearchParams(hash.substring(1));
+        const access_token = params.get('access_token');
+        const refresh_token = params.get('refresh_token');
+        if (access_token && refresh_token) {
+            console.log('Processing email confirmation token...');
+            const { data, error } = await supabaseClient.auth.setSession({
+                access_token,
+                refresh_token
+            });
+            if (error) {
+                console.error('Error confirming email:', error);
+                showToast('Error confirming email. Please try again.');
+            } else {
+                console.log('Email confirmed, session set:', data);
+                showToast('Email confirmed! You are now signed in.');
+                // Clean URL
+                window.location.hash = '';
+                showDashboard();
+            }
+        }
+    }
 }
 
 // ============================================================
@@ -525,8 +555,9 @@ document.querySelectorAll('.packages-filters button').forEach(btn => {
 // ============================================================
 renderPackages('all');
 checkSession();
+handleEmailConfirmation(); // <-- handles the confirmation link
 
-// Listen for auth changes
+// Listen for auth changes (e.g., sign out)
 supabaseClient.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_OUT') {
         showPublic();
