@@ -41,7 +41,59 @@ const toast = document.getElementById('toast');
 const toastMessage = document.getElementById('toastMessage');
 
 // ============================================================
-// Auth Functions with detailed logging
+// Dark Mode
+// ============================================================
+function toggleDarkMode() {
+    const html = document.documentElement;
+    const toggle = document.getElementById('darkModeToggle');
+    const label = document.getElementById('currentThemeLabel');
+    if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        toggle.classList.remove('active');
+        if (label) label.textContent = 'Light';
+        localStorage.setItem('theme', 'light');
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        toggle.classList.add('active');
+        if (label) label.textContent = 'Dark';
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+function loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const html = document.documentElement;
+    const toggle = document.getElementById('darkModeToggle');
+    const label = document.getElementById('currentThemeLabel');
+    if (savedTheme === 'dark') {
+        html.setAttribute('data-theme', 'dark');
+        if (toggle) toggle.classList.add('active');
+        if (label) label.textContent = 'Dark';
+    } else {
+        html.setAttribute('data-theme', 'light');
+        if (toggle) toggle.classList.remove('active');
+        if (label) label.textContent = 'Light';
+    }
+}
+
+// ============================================================
+// Noor Popup
+// ============================================================
+function openNoorPopup() {
+    document.getElementById('noorPopup').classList.add('active');
+}
+
+function closeNoorPopup() {
+    document.getElementById('noorPopup').classList.remove('active');
+}
+
+// Close popup on overlay click
+document.getElementById('noorPopup')?.addEventListener('click', function(e) {
+    if (e.target === this) closeNoorPopup();
+});
+
+// ============================================================
+// Auth Functions
 // ============================================================
 async function handleSignUp() {
     const name = document.getElementById('signupName').value.trim();
@@ -204,7 +256,6 @@ function showAuthModal(mode = 'signin') {
 async function handleEmailConfirmation() {
     const hash = window.location.hash;
     if (hash && hash.includes('access_token')) {
-        // Supabase sends the token as #access_token=...
         const params = new URLSearchParams(hash.substring(1));
         const access_token = params.get('access_token');
         const refresh_token = params.get('refresh_token');
@@ -220,7 +271,6 @@ async function handleEmailConfirmation() {
             } else {
                 console.log('Email confirmed, session set:', data);
                 showToast('Email confirmed! You are now signed in.');
-                // Clean URL
                 window.location.hash = '';
                 showDashboard();
             }
@@ -554,10 +604,11 @@ document.querySelectorAll('.packages-filters button').forEach(btn => {
 // Init
 // ============================================================
 renderPackages('all');
+loadTheme(); // Load saved dark mode preference
 checkSession();
-handleEmailConfirmation(); // <-- handles the confirmation link
+handleEmailConfirmation();
 
-// Listen for auth changes (e.g., sign out)
+// Listen for auth changes
 supabaseClient.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_OUT') {
         showPublic();
