@@ -1,1 +1,1 @@
-"We aim to connect students with simple and interactive education to promote a sense of confidence within Montgomery County so that they can enjoy what they do best, all for free. Not everyone gets that chance, and we want to change that."
+
