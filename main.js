@@ -4,13 +4,7 @@
 const SUPABASE_URL = 'https://idosxouzulookidzikxh.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_RoWVD_wik-DnpBVckZAe8g_JoLjlzWq';
 
-let supabase;
-try {
-    supabase = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-    console.log('Supabase client initialized.');
-} catch (e) {
-    console.error('Failed to initialize Supabase client:', e);
-}
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
 // ============================================================
 // DOM References
@@ -68,14 +62,10 @@ async function handleSignUp() {
     });
 
     if (error) {
-        console.error('Sign up error:', error);
         showToast('Error: ' + error.message);
     } else {
-        console.log('Sign up successful:', data);
         showToast('Account created! Please check your email to confirm.');
         closeAuthModal();
-        // Optionally sign them in immediately
-        // await handleSignInAfterSignUp(email, password);
     }
 }
 
@@ -91,21 +81,9 @@ async function handleSignIn() {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-        console.error('Sign in error:', error);
         showToast('Error: ' + error.message);
     } else {
-        console.log('Sign in successful:', data);
         closeAuthModal();
-        showDashboard();
-    }
-}
-
-async function handleSignInAfterSignUp(email, password) {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-        console.error('Auto sign-in after sign-up error:', error);
-        showToast('Please sign in manually.');
-    } else {
         showDashboard();
     }
 }
@@ -118,7 +96,6 @@ async function handleResetPassword() {
     }
     const { error } = await supabase.auth.resetPasswordForEmail(email);
     if (error) {
-        console.error('Reset password error:', error);
         showToast('Error: ' + error.message);
     } else {
         showToast('Password reset link sent to your email.');
@@ -129,7 +106,6 @@ async function handleResetPassword() {
 async function signOut() {
     const { error } = await supabase.auth.signOut();
     if (error) {
-        console.error('Sign out error:', error);
         showToast('Error signing out: ' + error.message);
     } else {
         showPublic();
@@ -209,7 +185,7 @@ function showToast(message) {
 }
 
 // ============================================================
-// Package Rendering (static data – unchanged)
+// Package Rendering (static data)
 // ============================================================
 const packagesData = [
     { id: 1, name: 'Economy Umrah Package', category: 'economy', nights: '8 nights', makkah: 'Al Safwah Hotel', madinah: 'Al Eiman Royal', stars: 3, distance: '15 min to Haram', flight: 'Economy class included', transport: 'Group transfers', includes: ['Flights', 'Hotels', 'Group transfers', 'Visa assistance'], excludes: ['Meals', 'Extra luggage'], price: '£1,450' },
@@ -221,7 +197,6 @@ const packagesData = [
 
 function renderPackages(filter = 'all') {
     const grid = document.getElementById('packagesGrid');
-    if (!grid) return;
     const filtered = filter === 'all' ? packagesData : packagesData.filter(p => p.category === filter);
     grid.innerHTML = filtered.map(p => `
         <div class="package-card animated-border">
@@ -305,23 +280,21 @@ function activateSettingsPane(paneId) {
 // ============================================================
 const notifToggle = document.getElementById('notifToggle');
 const notifDropdown = document.getElementById('notifDropdown');
-if (notifToggle && notifDropdown) {
-    notifToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        notifDropdown.classList.toggle('active');
-    });
-    document.addEventListener('click', function(e) {
-        if (!notifToggle.contains(e.target) && !notifDropdown.contains(e.target)) {
-            notifDropdown.classList.remove('active');
-        }
-    });
-    document.getElementById('markAllRead')?.addEventListener('click', function() {
-        document.querySelectorAll('.notif-item.unread').forEach(el => el.classList.remove('unread'));
-        document.querySelector('.notif-dot').style.display = 'none';
-        showToast('All notifications marked as read.');
+notifToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    notifDropdown.classList.toggle('active');
+});
+document.addEventListener('click', function(e) {
+    if (!notifToggle.contains(e.target) && !notifDropdown.contains(e.target)) {
         notifDropdown.classList.remove('active');
-    });
-}
+    }
+});
+document.getElementById('markAllRead').addEventListener('click', function() {
+    document.querySelectorAll('.notif-item.unread').forEach(el => el.classList.remove('unread'));
+    document.querySelector('.notif-dot').style.display = 'none';
+    showToast('All notifications marked as read.');
+    notifDropdown.classList.remove('active');
+});
 
 // ============================================================
 // Sidebar Toggle (mobile)
@@ -331,14 +304,14 @@ const toggleBtn = document.createElement('button');
 toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
 toggleBtn.style.cssText = 'display:none;background:none;border:none;font-size:1.4rem;color:var(--charcoal);padding:4px 8px;';
 toggleBtn.onclick = function() { document.getElementById('dashSidebar').classList.toggle('open'); };
-if (dashHeader) dashHeader.prepend(toggleBtn);
+dashHeader.prepend(toggleBtn);
 
 function handleDashToggleVisibility() {
     if (window.innerWidth <= 768) {
         toggleBtn.style.display = 'block';
     } else {
         toggleBtn.style.display = 'none';
-        document.getElementById('dashSidebar')?.classList.remove('open');
+        document.getElementById('dashSidebar').classList.remove('open');
     }
 }
 window.addEventListener('resize', handleDashToggleVisibility);
@@ -346,7 +319,7 @@ handleDashToggleVisibility();
 
 document.addEventListener('click', function(e) {
     const sidebar = document.getElementById('dashSidebar');
-    if (window.innerWidth <= 768 && sidebar?.classList.contains('open')) {
+    if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
         if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
             sidebar.classList.remove('open');
         }
@@ -370,50 +343,46 @@ document.querySelectorAll('.faq-item .faq-question').forEach(btn => {
 // ============================================================
 window.addEventListener('scroll', function() {
     const nav = document.getElementById('navbar');
-    if (nav) {
-        if (window.scrollY > 60) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
-    }
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
 });
 
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
-if (navToggle && navLinks) {
-    navToggle.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('open');
-        document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+navToggle.addEventListener('click', function() {
+    this.classList.toggle('active');
+    navLinks.classList.toggle('open');
+    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('#navLinks a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('active');
+        document.body.style.overflow = '';
     });
-    document.querySelectorAll('#navLinks a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('open');
-            navToggle.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-    });
-}
+});
 
 // ============================================================
 // Public Buttons -> Show Auth Modal
 // ============================================================
-document.getElementById('publicSignInBtn')?.addEventListener('click', () => showAuthModal('signin'));
-document.getElementById('publicPlanBtn')?.addEventListener('click', () => showAuthModal('signin'));
-document.getElementById('heroPlanBtn')?.addEventListener('click', () => showAuthModal('signin'));
-document.getElementById('searchFindBtn')?.addEventListener('click', () => showAuthModal('signin'));
-document.getElementById('goToWebsiteBtn')?.addEventListener('click', showPublic);
-document.getElementById('signOutBtn')?.addEventListener('click', signOut);
+document.getElementById('publicSignInBtn').addEventListener('click', () => showAuthModal('signin'));
+document.getElementById('publicPlanBtn').addEventListener('click', () => showAuthModal('signin'));
+document.getElementById('heroPlanBtn').addEventListener('click', () => showAuthModal('signin'));
+document.getElementById('searchFindBtn').addEventListener('click', () => showAuthModal('signin'));
+document.getElementById('goToWebsiteBtn').addEventListener('click', showPublic);
+document.getElementById('signOutBtn').addEventListener('click', signOut);
 
 // ============================================================
-// Auth Buttons (now using addEventListener)
+// Auth Buttons (using addEventListener)
 // ============================================================
-document.getElementById('signInBtn')?.addEventListener('click', handleSignIn);
-document.getElementById('signUpBtn')?.addEventListener('click', handleSignUp);
-document.getElementById('resetBtn')?.addEventListener('click', handleResetPassword);
+document.getElementById('signInBtn').addEventListener('click', handleSignIn);
+document.getElementById('signUpBtn').addEventListener('click', handleSignUp);
+document.getElementById('resetBtn').addEventListener('click', handleResetPassword);
 
 // ============================================================
 // Settings: Save Profile
 // ============================================================
-document.getElementById('saveProfileBtn')?.addEventListener('click', async function() {
+document.getElementById('saveProfileBtn').addEventListener('click', async function() {
     const fullName = settingsFullName.value;
     const phone = settingsPhone.value;
     const language = settingsLanguage.value;
@@ -436,7 +405,7 @@ document.getElementById('saveProfileBtn')?.addEventListener('click', async funct
 // ============================================================
 // Settings: Update Password
 // ============================================================
-document.getElementById('updatePasswordBtn')?.addEventListener('click', async function() {
+document.getElementById('updatePasswordBtn').addEventListener('click', async function() {
     const current = document.getElementById('currentPassword').value;
     const newPass = document.getElementById('newPassword').value;
     const confirm = document.getElementById('confirmPassword').value;
@@ -472,7 +441,7 @@ async function sendMessage() {
     appendMessage('user', message);
     chatInput.value = '';
 
-    // Show typing indicator
+    // Typing indicator
     appendMessage('assistant', '...');
 
     try {
@@ -483,7 +452,6 @@ async function sendMessage() {
         });
 
         const data = await response.json();
-        // Remove typing indicator
         chatMessages.removeChild(chatMessages.lastChild);
         if (data.success) {
             appendMessage('assistant', data.response);
@@ -505,8 +473,8 @@ function appendMessage(role, content) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-sendChatBtn?.addEventListener('click', sendMessage);
-chatInput?.addEventListener('keydown', function(e) {
+sendChatBtn.addEventListener('click', sendMessage);
+chatInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') sendMessage();
 });
 
@@ -527,7 +495,7 @@ document.querySelectorAll('.packages-filters button').forEach(btn => {
 renderPackages('all');
 checkSession();
 
-// Listen for auth changes (e.g., sign out)
+// Listen for auth changes
 supabase.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_OUT') {
         showPublic();
