@@ -55,7 +55,6 @@
         html {
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
@@ -231,31 +230,65 @@
             background: rgba(201, 168, 76, 0.15);
             color: #8a6e2a;
         }
-        .badge-blue {
-            background: rgba(41, 128, 185, 0.12);
-            color: #1a6b8a;
+        .badge-red {
+            background: rgba(231, 76, 60, 0.12);
+            color: #c0392b;
         }
 
-        /* ===== GEOMETRIC DIVIDER ===== */
-        .geo-divider {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin: 40px 0 20px;
-            opacity: 0.25;
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .geo-divider .line {
-            height: 1px;
-            width: 60px;
-            background: var(--sand);
+        @keyframes borderSpin {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
-        .geo-divider .diamond {
-            width: 8px;
-            height: 8px;
-            transform: rotate(45deg);
-            background: var(--gold-subtle);
-            border-radius: 1px;
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== ANIMATED BORDER (cards) ===== */
+        .animated-border {
+            position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            z-index: 1;
+        }
+        .animated-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(60deg, var(--gold), var(--emerald-light), var(--gold), var(--emerald));
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderSpin 5s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
         }
 
         /* ===== NAVBAR ===== */
@@ -378,7 +411,6 @@
             transform: translateY(-1px);
         }
 
-        /* Mobile menu toggle */
         .nav-toggle {
             display: none;
             flex-direction: column;
@@ -784,9 +816,6 @@
             color: var(--text-muted);
             max-width: 260px;
             margin: 0 auto;
-        }
-        .how-step .step-line {
-            display: none;
         }
 
         /* ===== WHY CHOOSE US ===== */
@@ -1295,6 +1324,7 @@
             display: flex;
             gap: 12px;
             align-items: center;
+            position: relative;
         }
         .dash-header .dash-actions .notif-btn {
             position: relative;
@@ -1324,6 +1354,71 @@
             border: 2px solid #fff;
         }
 
+        /* NOTIFICATIONS DROPDOWN */
+        .notif-dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 340px;
+            max-height: 420px;
+            background: #fff;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(26, 77, 62, 0.06);
+            overflow: hidden;
+            z-index: 100;
+            animation: slideDown 0.25s ease forwards;
+        }
+        .notif-dropdown.active {
+            display: block;
+        }
+        .notif-dropdown .notif-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(26, 77, 62, 0.06);
+            font-weight: 600;
+        }
+        .notif-dropdown .notif-header button {
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 500;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .notif-dropdown .notif-header button:hover {
+            text-decoration: underline;
+        }
+        .notif-dropdown .notif-list {
+            overflow-y: auto;
+            max-height: 340px;
+        }
+        .notif-dropdown .notif-item {
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+            transition: var(--transition);
+            cursor: default;
+        }
+        .notif-dropdown .notif-item:hover {
+            background: var(--cream);
+        }
+        .notif-dropdown .notif-item.unread {
+            background: rgba(201, 168, 76, 0.04);
+            border-left: 3px solid var(--gold);
+        }
+        .notif-dropdown .notif-item .notif-text {
+            font-size: 0.85rem;
+            color: var(--charcoal);
+        }
+        .notif-dropdown .notif-item .notif-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
         /* Dashboard Cards */
         .dash-grid {
             display: grid;
@@ -1337,6 +1432,11 @@
             padding: 24px;
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(26, 77, 62, 0.04);
+            transition: var(--transition);
+        }
+        .dash-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
         }
         .dash-card .label {
             font-size: 0.8rem;
@@ -1413,6 +1513,7 @@
         /* Tab content */
         .dash-tab {
             display: none;
+            animation: fadeInUp 0.4s ease forwards;
         }
         .dash-tab.active {
             display: block;
@@ -1510,16 +1611,107 @@
             border-bottom: none;
         }
 
-        /* ===== ADMIN ===== */
-        .admin-badge {
-            background: rgba(201, 168, 76, 0.12);
-            color: #8a6e2a;
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 2px 10px;
+        /* ===== SETTINGS (enhanced) ===== */
+        .settings-nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid rgba(26, 77, 62, 0.08);
+            padding-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        .settings-nav .settings-nav-item {
+            padding: 10px 20px;
             border-radius: 100px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+            background: transparent;
+            border: 1px solid transparent;
+        }
+        .settings-nav .settings-nav-item:hover {
+            background: rgba(26, 77, 62, 0.04);
+            color: var(--charcoal);
+        }
+        .settings-nav .settings-nav-item.active {
+            background: var(--emerald);
+            color: #fff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .settings-pane {
+            display: none;
+            animation: fadeInUp 0.3s ease forwards;
+        }
+        .settings-pane.active {
+            display: block;
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+        }
+        .toggle-group .toggle-label {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .toggle-group .toggle-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: #d1d5db;
+            border-radius: 100px;
+            transition: var(--transition);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .toggle-switch.active {
+            background: var(--emerald);
+        }
+        .toggle-switch .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: var(--transition);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+        }
+        .toggle-switch.active .toggle-knob {
+            left: 22px;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--charcoal);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            z-index: 9999;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            animation: fadeInUp 0.3s ease forwards;
+            border-left: 4px solid var(--gold);
+        }
+        .toast.show {
+            display: flex;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -1533,9 +1725,32 @@
         }
 
         @media (max-width: 768px) {
-            .nav-links,
-            .nav-actions .btn-signin {
+            .nav-links {
                 display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 51, 40, 0.98);
+                backdrop-filter: blur(16px);
+                padding: 24px;
+                gap: 16px;
+                border-radius: 0 0 var(--radius) var(--radius);
+                box-shadow: var(--shadow-lg);
+            }
+            .navbar.scrolled .nav-links {
+                background: rgba(252, 250, 247, 0.98);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-links a {
+                color: #fff;
+                font-size: 1rem;
+            }
+            .navbar.scrolled .nav-links a {
+                color: var(--charcoal);
             }
             .nav-toggle {
                 display: flex;
@@ -1543,43 +1758,6 @@
             .nav-actions .btn-nav-cta {
                 padding: 8px 16px;
                 font-size: 0.8rem;
-            }
-
-            .mobile-menu {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: rgba(15, 51, 40, 0.98);
-                backdrop-filter: blur(16px);
-                z-index: 999;
-                display: none;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 24px;
-                padding: 40px;
-            }
-            .mobile-menu.active {
-                display: flex;
-            }
-            .mobile-menu a {
-                color: #fff;
-                font-size: 1.3rem;
-                font-weight: 500;
-                transition: var(--transition);
-            }
-            .mobile-menu a:hover {
-                color: var(--gold);
-            }
-            .mobile-menu .btn-mobile-cta {
-                background: var(--gold);
-                color: #fff;
-                padding: 14px 40px;
-                border-radius: 100px;
-                font-weight: 600;
-                margin-top: 12px;
             }
 
             .hero-content h1 {
@@ -1634,6 +1812,19 @@
             .dash-grid {
                 grid-template-columns: 1fr 1fr;
             }
+
+            .settings-nav {
+                gap: 4px;
+            }
+            .settings-nav .settings-nav-item {
+                padding: 6px 14px;
+                font-size: 0.75rem;
+            }
+
+            .notif-dropdown {
+                width: 300px;
+                right: -20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1664,6 +1855,10 @@
             .testimonials-grid {
                 grid-template-columns: 1fr;
             }
+            .notif-dropdown {
+                width: 260px;
+                right: -10px;
+            }
         }
     </style>
 </head>
@@ -1682,7 +1877,7 @@
                     Nur<span>Travel</span>
                 </a>
 
-                <div class="nav-links">
+                <div class="nav-links" id="navLinks">
                     <a href="#packages">Umrah Packages</a>
                     <a href="#services">Services</a>
                     <a href="#about">About</a>
@@ -1700,17 +1895,6 @@
                 </div>
             </div>
         </nav>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="#packages" onclick="closeMobile()">Umrah Packages</a>
-            <a href="#services" onclick="closeMobile()">Services</a>
-            <a href="#about" onclick="closeMobile()">About</a>
-            <a href="#how" onclick="closeMobile()">How It Works</a>
-            <a href="#faq" onclick="closeMobile()">FAQs</a>
-            <a href="#contact" onclick="closeMobile()">Contact</a>
-            <button class="btn-mobile-cta" onclick="showAuthModal('signin'); closeMobile();">Plan Your Umrah</button>
-        </div>
 
         <!-- HERO -->
         <section class="hero" id="home">
@@ -1783,7 +1967,7 @@
                 </div>
 
                 <div class="packages-grid" id="packagesGrid">
-                    <!-- cards injected by JS -->
+                    <!-- injected by JS -->
                 </div>
             </div>
         </section>
@@ -2038,7 +2222,7 @@
     AUTH MODAL
     ============================================================ -->
     <div id="authModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(15,51,40,0.6);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;">
-        <div style="background:#fff;border-radius:var(--radius);max-width:440px;width:100%;padding:40px 32px;box-shadow:var(--shadow-lg);position:relative;">
+        <div style="background:#fff;border-radius:var(--radius);max-width:440px;width:100%;padding:40px 32px;box-shadow:var(--shadow-lg);position:relative;max-height:90vh;overflow-y:auto;">
             <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:20px;font-size:1.4rem;color:var(--text-muted);background:none;border:none;cursor:pointer;"><i class="fas fa-times"></i></button>
             <div id="authFormContainer">
                 <!-- Sign In Form -->
@@ -2121,7 +2305,7 @@
                 <div class="nav-item" data-tab="dash-payments"><i class="fas fa-credit-card"></i> Payments</div>
                 <div class="nav-item" data-tab="dash-messages"><i class="fas fa-envelope"></i> Messages <span class="badge-dot"></span></div>
                 <div class="nav-item" data-tab="dash-support"><i class="fas fa-headset"></i> Support</div>
-                <div class="nav-item" data-tab="dash-settings"><i class="fas fa-cog"></i> Settings</div>
+                <div class="nav-item active" data-tab="dash-settings"><i class="fas fa-cog"></i> Settings</div>
                 <div class="nav-item" style="margin-top:12px;border-top:1px solid rgba(26,77,62,0.06);padding-top:12px;" onclick="handleSignOut()"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
             </nav>
             <div class="dash-user">
@@ -2139,10 +2323,37 @@
             <div class="dash-header">
                 <h2><span id="dashGreeting">Assalamu Alaikum</span>, Ahmed</h2>
                 <div class="dash-actions">
-                    <button class="notif-btn" onclick="toggleNotifications()">
-                        <i class="fas fa-bell"></i>
-                        <span class="notif-dot"></span>
-                    </button>
+                    <!-- Notification Button & Dropdown -->
+                    <div style="position:relative;">
+                        <button class="notif-btn" id="notifToggle">
+                            <i class="fas fa-bell"></i>
+                            <span class="notif-dot"></span>
+                        </button>
+                        <div class="notif-dropdown" id="notifDropdown">
+                            <div class="notif-header">
+                                <span>Notifications</span>
+                                <button id="markAllRead">Mark all read</button>
+                            </div>
+                            <div class="notif-list">
+                                <div class="notif-item unread">
+                                    <div class="notif-text">✈️ Your flight to Jeddah has been confirmed.</div>
+                                    <div class="notif-time">2 hours ago</div>
+                                </div>
+                                <div class="notif-item unread">
+                                    <div class="notif-text">💳 Payment received — thank you!</div>
+                                    <div class="notif-time">5 hours ago</div>
+                                </div>
+                                <div class="notif-item">
+                                    <div class="notif-text">📄 Your visa documents are ready to download.</div>
+                                    <div class="notif-time">2 days ago</div>
+                                </div>
+                                <div class="notif-item">
+                                    <div class="notif-text">🏨 Hotel upgrade available in Madinah.</div>
+                                    <div class="notif-time">3 days ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <button class="btn-primary" style="padding:10px 22px;font-size:0.85rem;" onclick="showPublic()">
                         <i class="fas fa-globe"></i> Website
                     </button>
@@ -2150,15 +2361,15 @@
             </div>
 
             <!-- ===== DASHBOARD HOME ===== -->
-            <div class="dash-tab active" id="dash-home">
+            <div class="dash-tab" id="dash-home">
                 <div class="dash-grid">
-                    <div class="dash-card"><div class="icon-bg"><i class="fas fa-calendar-day"></i></div><div class="label">Upcoming Trip</div><div class="value">15 Sep 2026</div><div class="sub">42 days left</div></div>
-                    <div class="dash-card"><div class="icon-bg"><i class="fas fa-kaaba"></i></div><div class="label">Package</div><div class="value">Premium Umrah</div><div class="sub">10 nights · Makkah + Madinah</div></div>
-                    <div class="dash-card"><div class="icon-bg"><i class="fas fa-check-circle"></i></div><div class="label">Booking Status</div><div class="value" style="color:var(--emerald);">Confirmed</div><div class="sub">All arrangements complete</div></div>
-                    <div class="dash-card"><div class="icon-bg"><i class="fas fa-credit-card"></i></div><div class="label">Payment</div><div class="value">£2,850</div><div class="sub">Paid · Balance £0</div></div>
+                    <div class="dash-card animated-border"><div class="icon-bg"><i class="fas fa-calendar-day"></i></div><div class="label">Upcoming Trip</div><div class="value">15 Sep 2026</div><div class="sub">42 days left</div></div>
+                    <div class="dash-card animated-border"><div class="icon-bg"><i class="fas fa-kaaba"></i></div><div class="label">Package</div><div class="value">Premium Umrah</div><div class="sub">10 nights · Makkah + Madinah</div></div>
+                    <div class="dash-card animated-border"><div class="icon-bg"><i class="fas fa-check-circle"></i></div><div class="label">Booking Status</div><div class="value" style="color:var(--emerald);">Confirmed</div><div class="sub">All arrangements complete</div></div>
+                    <div class="dash-card animated-border"><div class="icon-bg"><i class="fas fa-credit-card"></i></div><div class="label">Payment</div><div class="value">£2,850</div><div class="sub">Paid · Balance £0</div></div>
                 </div>
 
-                <div class="timeline">
+                <div class="timeline animated-border">
                     <h4 style="font-family:var(--font-serif);font-size:1.1rem;font-weight:700;margin-bottom:12px;">Your Journey Timeline</h4>
                     <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane-departure"></i></div><div class="tl-content"><div class="tl-title">Departure from London</div><div class="tl-desc">15 Sep 2026 · 10:30 AM · LHR Terminal 3</div><div class="tl-status"><i class="fas fa-check-circle" style="color:var(--emerald);"></i> Confirmed</div></div></div>
                     <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane-arrival"></i></div><div class="tl-content"><div class="tl-title">Arrival in Jeddah</div><div class="tl-desc">16 Sep 2026 · 6:45 AM · King Abdulaziz Airport</div><div class="tl-status"><i class="fas fa-clock" style="color:var(--gold);"></i> Pending</div></div></div>
@@ -2174,7 +2385,7 @@
             <div class="dash-tab" id="dash-trip">
                 <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">My Trip Details</h3>
                 <p style="color:var(--text-muted);margin-bottom:20px;">Full itinerary for your Umrah journey.</p>
-                <div class="timeline">
+                <div class="timeline animated-border">
                     <div class="tl-item"><div class="tl-icon"><i class="fas fa-calendar-check"></i></div><div class="tl-content"><div class="tl-title">Trip ID: NUR-2026-001</div><div class="tl-desc">10 nights · 15 – 26 Sep 2026 · Premium Umrah Package</div><div class="tl-status"><span class="badge badge-green"><i class="fas fa-check"></i> Confirmed</span></div></div></div>
                     <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane"></i></div><div class="tl-content"><div class="tl-title">Flight: London → Jeddah</div><div class="tl-desc">Saudi Airlines · SV102 · 15 Sep 2026 · 10:30 AM</div></div></div>
                     <div class="tl-item"><div class="tl-icon"><i class="fas fa-hotel"></i></div><div class="tl-content"><div class="tl-title">Makkah: Hilton Suites</div><div class="tl-desc">6 nights · Deluxe Room · 5-star · 5 min to Haram</div></div></div>
@@ -2188,7 +2399,7 @@
             <div class="dash-tab" id="dash-flights">
                 <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Flight Information</h3>
                 <p style="color:var(--text-muted);margin-bottom:20px;">Your flight details and status.</p>
-                <div style="background:#fff;border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                <div class="animated-border" style="background:#fff;border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
                         <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Airline</span><div style="font-weight:600;font-size:1.1rem;">Saudi Airlines</div></div>
                         <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Flight Number</span><div style="font-weight:600;font-size:1.1rem;">SV102 / SV103</div></div>
@@ -2211,7 +2422,7 @@
             <div class="dash-tab" id="dash-package">
                 <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Your Umrah Package</h3>
                 <p style="color:var(--text-muted);margin-bottom:20px;">All the details of your selected package.</p>
-                <div style="background:#fff;border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                <div class="animated-border" style="background:#fff;border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
                         <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Package Name</span><div style="font-weight:600;font-size:1.1rem;">Premium Umrah Package</div></div>
                         <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Duration</span><div>10 nights · 15–26 Sep 2026</div></div>
@@ -2233,7 +2444,7 @@
             <div class="dash-tab" id="dash-documents">
                 <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Your Documents</h3>
                 <p style="color:var(--text-muted);margin-bottom:20px;">Important travel documents for your journey.</p>
-                <div class="doc-list">
+                <div class="doc-list animated-border">
                     <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Flight Itinerary</div><div class="doc-date">Updated 12 Aug 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
                     <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Hotel Confirmation - Makkah</div><div class="doc-date">Updated 10 Aug 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
                     <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Hotel Confirmation - Madinah</div><div class="doc-date">Updated 10 Aug 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
@@ -2248,12 +2459,12 @@
                 <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Payments</h3>
                 <p style="color:var(--text-muted);margin-bottom:20px;">Your payment summary and history.</p>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px;">
-                    <div class="dash-card"><div class="label">Total Package Price</div><div class="value">£3,450</div></div>
-                    <div class="dash-card"><div class="label">Amount Paid</div><div class="value" style="color:var(--emerald);">£3,450</div></div>
-                    <div class="dash-card"><div class="label">Remaining Balance</div><div class="value" style="color:var(--text-muted);">£0</div></div>
-                    <div class="dash-card"><div class="label">Payment Due</div><div class="value" style="font-size:1.2rem;">Paid in Full</div></div>
+                    <div class="dash-card animated-border"><div class="label">Total Package Price</div><div class="value">£3,450</div></div>
+                    <div class="dash-card animated-border"><div class="label">Amount Paid</div><div class="value" style="color:var(--emerald);">£3,450</div></div>
+                    <div class="dash-card animated-border"><div class="label">Remaining Balance</div><div class="value" style="color:var(--text-muted);">£0</div></div>
+                    <div class="dash-card animated-border"><div class="label">Payment Due</div><div class="value" style="font-size:1.2rem;">Paid in Full</div></div>
                 </div>
-                <table class="payment-table">
+                <table class="payment-table animated-border">
                     <thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th></tr></thead>
                     <tbody>
                         <tr><td>01 Aug 2026</td><td>Deposit — Premium Umrah Package</td><td>£1,000</td><td><span class="badge badge-green">Paid</span></td></tr>
@@ -2271,7 +2482,7 @@
             <div class="dash-tab" id="dash-messages">
                 <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Messages</h3>
                 <p style="color:var(--text-muted);margin-bottom:20px;">Conversations with your travel support team.</p>
-                <div style="background:#fff;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);overflow:hidden;">
+                <div class="animated-border" style="background:#fff;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);overflow:hidden;">
                     <div style="padding:16px 20px;border-bottom:1px solid rgba(26,77,62,0.04);display:flex;justify-content:space-between;align-items:center;">
                         <span style="font-weight:600;">Support Team</span>
                         <span style="font-size:0.75rem;color:var(--text-muted);">Active now</span>
@@ -2301,22 +2512,22 @@
                 <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Support Center</h3>
                 <p style="color:var(--text-muted);margin-bottom:20px;">We're here to help you every step of the way.</p>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
-                    <div class="dash-card" style="text-align:center;cursor:pointer;" onclick="document.getElementById('dash-messages').click();">
+                    <div class="dash-card animated-border" style="text-align:center;cursor:pointer;" onclick="document.getElementById('dash-messages').click();">
                         <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-comment-dots"></i></div>
                         <h4 style="margin-top:8px;font-weight:600;">Live Chat</h4>
                         <p style="font-size:0.85rem;color:var(--text-muted);">Chat with our support team</p>
                     </div>
-                    <div class="dash-card" style="text-align:center;cursor:pointer;" onclick="window.location.href='mailto:support@nurtravel.com'">
+                    <div class="dash-card animated-border" style="text-align:center;cursor:pointer;" onclick="window.location.href='mailto:support@nurtravel.com'">
                         <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-envelope"></i></div>
                         <h4 style="margin-top:8px;font-weight:600;">Email Us</h4>
                         <p style="font-size:0.85rem;color:var(--text-muted);">support@nurtravel.com</p>
                     </div>
-                    <div class="dash-card" style="text-align:center;cursor:pointer;" onclick="window.location.href='tel:+442012345678'">
+                    <div class="dash-card animated-border" style="text-align:center;cursor:pointer;" onclick="window.location.href='tel:+442012345678'">
                         <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-phone"></i></div>
                         <h4 style="margin-top:8px;font-weight:600;">Call Us</h4>
                         <p style="font-size:0.85rem;color:var(--text-muted);">+44 20 1234 5678</p>
                     </div>
-                    <div class="dash-card" style="text-align:center;" onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth'});showPublic();">
+                    <div class="dash-card animated-border" style="text-align:center;" onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth'});showPublic();">
                         <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-question-circle"></i></div>
                         <h4 style="margin-top:8px;font-weight:600;">FAQs</h4>
                         <p style="font-size:0.85rem;color:var(--text-muted);">Find answers quickly</p>
@@ -2324,27 +2535,96 @@
                 </div>
             </div>
 
-            <!-- ===== SETTINGS ===== -->
-            <div class="dash-tab" id="dash-settings">
+            <!-- ===== SETTINGS (Enhanced) ===== -->
+            <div class="dash-tab active" id="dash-settings">
                 <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Account Settings</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Manage your profile and preferences.</p>
-                <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Full Name</label><input type="text" value="Ahmed Ali" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label><input type="email" value="ahmed@example.com" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Phone Number</label><input type="tel" value="+44 7700 123456" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Language</label><select style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;"><option>English</option><option>Arabic</option><option>Urdu</option></select></div>
-                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">New Password</label><input type="password" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                        <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Confirm Password</label><input type="password" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Manage your profile, security, and preferences.</p>
+
+                <div class="settings-nav">
+                    <button class="settings-nav-item active" data-stab="settings-profile">Profile</button>
+                    <button class="settings-nav-item" data-stab="settings-security">Security</button>
+                    <button class="settings-nav-item" data-stab="settings-notif-pref">Notifications</button>
+                    <button class="settings-nav-item" data-stab="settings-privacy">Privacy</button>
+                    <button class="settings-nav-item" data-stab="settings-billing">Billing</button>
+                </div>
+
+                <div class="settings-content">
+                    <!-- Profile -->
+                    <div id="settings-profile" class="settings-pane active">
+                        <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Full Name</label><input type="text" value="Ahmed Ali" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label><input type="email" value="ahmed@example.com" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Phone Number</label><input type="tel" value="+44 7700 123456" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Language</label><select style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;"><option>English</option><option>Arabic</option><option>Urdu</option></select></div>
+                            </div>
+                            <button class="btn-primary" style="margin-top:20px;padding:10px 28px;font-size:0.85rem;" onclick="showToast('Profile updated successfully!')"><i class="fas fa-save"></i> Save Profile</button>
+                        </div>
                     </div>
-                    <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
-                        <button class="btn-primary" style="padding:10px 28px;font-size:0.85rem;"><i class="fas fa-save"></i> Save Changes</button>
-                        <button class="btn-secondary" style="padding:10px 28px;font-size:0.85rem;border-color:#e74c3c;color:#e74c3c;"><i class="fas fa-trash"></i> Delete Account</button>
+
+                    <!-- Security -->
+                    <div id="settings-security" class="settings-pane">
+                        <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                            <h4 style="font-weight:600;margin-bottom:16px;">Change Password</h4>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Current Password</label><input type="password" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">New Password</label><input type="password" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Confirm Password</label><input type="password" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                            </div>
+                            <button class="btn-primary" style="margin-top:16px;padding:10px 28px;font-size:0.85rem;" onclick="showToast('Password updated successfully!')"><i class="fas fa-key"></i> Update Password</button>
+                            <hr style="margin:24px 0;border-color:rgba(26,77,62,0.06);" />
+                            <div class="toggle-group">
+                                <div><div class="toggle-label">Two-Factor Authentication</div><div class="toggle-desc">Add an extra layer of security to your account.</div></div>
+                                <div class="toggle-switch" onclick="this.classList.toggle('active'); showToast('2FA setting updated.');"><div class="toggle-knob"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Preferences -->
+                    <div id="settings-notif-pref" class="settings-pane">
+                        <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                            <h4 style="font-weight:600;margin-bottom:16px;">Notification Preferences</h4>
+                            <div class="toggle-group"><div><div class="toggle-label">Email Notifications</div><div class="toggle-desc">Receive updates via email about your bookings.</div></div><div class="toggle-switch active" onclick="this.classList.toggle('active'); showToast('Email notification preference saved.');"><div class="toggle-knob"></div></div></div>
+                            <div class="toggle-group"><div><div class="toggle-label">SMS Notifications</div><div class="toggle-desc">Get important alerts on your phone.</div></div><div class="toggle-switch" onclick="this.classList.toggle('active'); showToast('SMS preference saved.');"><div class="toggle-knob"></div></div></div>
+                            <div class="toggle-group"><div><div class="toggle-label">Marketing Emails</div><div class="toggle-desc">Receive special offers and travel tips.</div></div><div class="toggle-switch" onclick="this.classList.toggle('active'); showToast('Marketing preference saved.');"><div class="toggle-knob"></div></div></div>
+                            <div class="toggle-group"><div><div class="toggle-label">Push Notifications</div><div class="toggle-desc">Get real-time updates on your dashboard.</div></div><div class="toggle-switch active" onclick="this.classList.toggle('active'); showToast('Push notification preference saved.');"><div class="toggle-knob"></div></div></div>
+                            <button class="btn-primary" style="margin-top:16px;padding:10px 28px;font-size:0.85rem;" onclick="showToast('Notification settings saved!')"><i class="fas fa-save"></i> Save Preferences</button>
+                        </div>
+                    </div>
+
+                    <!-- Privacy -->
+                    <div id="settings-privacy" class="settings-pane">
+                        <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                            <h4 style="font-weight:600;margin-bottom:16px;">Privacy Controls</h4>
+                            <div class="toggle-group"><div><div class="toggle-label">Data Sharing</div><div class="toggle-desc">Allow us to share your data with trusted partners for travel services.</div></div><div class="toggle-switch active" onclick="this.classList.toggle('active'); showToast('Data sharing preference saved.');"><div class="toggle-knob"></div></div></div>
+                            <div class="toggle-group"><div><div class="toggle-label">Account Visibility</div><div class="toggle-desc">Make your profile visible to other travelers (for group matching).</div></div><div class="toggle-switch" onclick="this.classList.toggle('active'); showToast('Visibility preference saved.');"><div class="toggle-knob"></div></div></div>
+                            <button class="btn-primary" style="margin-top:16px;padding:10px 28px;font-size:0.85rem;" onclick="showToast('Privacy settings updated!')"><i class="fas fa-save"></i> Save Privacy Settings</button>
+                        </div>
+                    </div>
+
+                    <!-- Billing -->
+                    <div id="settings-billing" class="settings-pane">
+                        <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                            <h4 style="font-weight:600;margin-bottom:16px;">Billing Information</h4>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Card Number</label><input type="text" placeholder="•••• •••• •••• ••••" value="**** **** **** 4242" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Expiry Date</label><input type="text" placeholder="MM/YY" value="12/27" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Billing Address</label><input type="text" placeholder="123 Main St, London, UK" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Postal Code</label><input type="text" placeholder="SW1A 1AA" value="SW1A 1AA" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                            </div>
+                            <button class="btn-primary" style="margin-top:16px;padding:10px 28px;font-size:0.85rem;" onclick="showToast('Billing information updated!')"><i class="fas fa-save"></i> Update Billing</button>
+                            <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(26,77,62,0.06);">
+                                <button class="btn-secondary" style="border-color:#e74c3c;color:#e74c3c;padding:10px 28px;font-size:0.85rem;" onclick="if(confirm('Remove payment method?')) showToast('Payment method removed.');"><i class="fas fa-trash"></i> Remove Payment Method</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"><i class="fas fa-check-circle" style="color:var(--gold);"></i> <span id="toastMessage">Saved!</span></div>
 
     <script>
         // ============================================================
@@ -2429,7 +2709,7 @@
             const grid = document.getElementById('packagesGrid');
             const filtered = filter === 'all' ? packagesData : packagesData.filter(p => p.category === filter);
             grid.innerHTML = filtered.map(p => `
-                    <div class="package-card">
+                    <div class="package-card animated-border">
                         <div class="pkg-header">
                             <div class="pkg-name">${p.name}</div>
                             <div class="pkg-stars">${'★'.repeat(p.stars)}${p.stars !== 'Your choice' ? '' : ' · Custom'}</div>
@@ -2486,7 +2766,7 @@
         });
 
         // ============================================================
-        // NAVBAR SCROLL
+        // NAVBAR SCROLL & MOBILE TOGGLE
         // ============================================================
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('navbar');
@@ -2494,28 +2774,26 @@
             else nav.classList.remove('scrolled');
         });
 
-        // ============================================================
-        // MOBILE MENU
-        // ============================================================
         const navToggle = document.getElementById('navToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
         navToggle.addEventListener('click', function() {
             this.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            navLinks.classList.toggle('open');
+            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
         });
 
-        function closeMobile() {
-            navToggle.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+        // Close mobile nav on link click
+        document.querySelectorAll('#navLinks a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
 
         // ============================================================
         // AUTH MODAL
         // ============================================================
-        let authCallback = null;
-
         function showAuthModal(mode = 'signin') {
             document.getElementById('authModal').style.display = 'flex';
             showAuthForm(mode);
@@ -2535,7 +2813,6 @@
         }
 
         function handleSignIn() {
-            // Demo: just sign in
             closeAuthModal();
             showDashboard();
         }
@@ -2552,13 +2829,14 @@
             document.getElementById('publicSite').style.display = 'none';
             document.getElementById('dashboardWrapper').classList.add('active');
             document.querySelector('body').style.overflow = 'auto';
-            // Set greeting based on time
             const hour = new Date().getHours();
             let greeting = 'Assalamu Alaikum';
             if (hour < 12) greeting = 'Sabah al-Khair';
             else if (hour < 18) greeting = 'Assalamu Alaikum';
             else greeting = 'Masa al-Khair';
             document.getElementById('dashGreeting').textContent = greeting;
+            // Ensure settings tab shows profile by default if settings is active
+            activateSettingsPane('settings-profile');
         }
 
         function showPublic() {
@@ -2566,8 +2844,6 @@
             document.getElementById('dashboardWrapper').classList.remove('active');
             document.querySelector('body').style.overflow = 'auto';
             closeAuthModal();
-            // Close mobile menu if open
-            closeMobile();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -2589,39 +2865,81 @@
                 document.querySelectorAll('.dash-tab').forEach(el => el.classList.remove('active'));
                 const target = document.getElementById(tabId);
                 if (target) target.classList.add('active');
-                // Close sidebar on mobile
                 if (window.innerWidth <= 768) {
                     document.getElementById('dashSidebar').classList.remove('open');
+                }
+                // If settings tab, activate profile sub-pane
+                if (tabId === 'dash-settings') {
+                    activateSettingsPane('settings-profile');
                 }
             });
         });
 
         // ============================================================
-        // NOTIFICATIONS
+        // SETTINGS SUB-NAVIGATION
         // ============================================================
-        function toggleNotifications() {
-            alert('📬 You have 2 unread notifications:\n\n1. Your flight has been confirmed.\n2. Payment received — thank you!');
+        document.querySelectorAll('.settings-nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const paneId = this.dataset.stab;
+                if (!paneId) return;
+                document.querySelectorAll('.settings-nav-item').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.settings-pane').forEach(el => el.classList.remove('active'));
+                const target = document.getElementById(paneId);
+                if (target) target.classList.add('active');
+            });
+        });
+
+        function activateSettingsPane(paneId) {
+            document.querySelectorAll('.settings-nav-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.settings-pane').forEach(el => el.classList.remove('active'));
+            const navBtn = document.querySelector(`.settings-nav-item[data-stab="${paneId}"]`);
+            if (navBtn) navBtn.classList.add('active');
+            const pane = document.getElementById(paneId);
+            if (pane) pane.classList.add('active');
         }
 
         // ============================================================
-        // INIT
+        // NOTIFICATIONS DROPDOWN
         // ============================================================
-        renderPackages('all');
+        const notifToggle = document.getElementById('notifToggle');
+        const notifDropdown = document.getElementById('notifDropdown');
 
-        // Auto-show dashboard if user is "signed in" — for demo we start on public
-        console.log('🌙 Nur Travel — Your Umrah Journey Awaits.');
-
-        // Clicking on dashboard tabs in mobile should close sidebar
-        document.querySelectorAll('.dash-nav .nav-item').forEach(el => {
-            el.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
-                    document.getElementById('dashSidebar').classList.remove('open');
-                }
-            });
+        notifToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            notifDropdown.classList.toggle('active');
         });
 
-        // Toggle sidebar on mobile via a small overlay or tap — we'll add a simple toggle button inside the main header
-        // Add a hamburger in dashboard header for mobile
+        document.addEventListener('click', function(e) {
+            if (!notifToggle.contains(e.target) && !notifDropdown.contains(e.target)) {
+                notifDropdown.classList.remove('active');
+            }
+        });
+
+        document.getElementById('markAllRead').addEventListener('click', function() {
+            document.querySelectorAll('.notif-item.unread').forEach(el => el.classList.remove('unread'));
+            document.querySelector('.notif-dot').style.display = 'none';
+            showToast('All notifications marked as read.');
+            notifDropdown.classList.remove('active');
+        });
+
+        // ============================================================
+        // TOAST
+        // ============================================================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ============================================================
+        // SIDEBAR TOGGLE (mobile)
+        // ============================================================
         const dashHeader = document.querySelector('.dash-header');
         const toggleBtn = document.createElement('button');
         toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
@@ -2632,7 +2950,6 @@
         };
         dashHeader.prepend(toggleBtn);
 
-        // Show toggle on mobile
         function handleDashToggleVisibility() {
             if (window.innerWidth <= 768) {
                 toggleBtn.style.display = 'block';
@@ -2644,7 +2961,6 @@
         window.addEventListener('resize', handleDashToggleVisibility);
         handleDashToggleVisibility();
 
-        // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function(e) {
             const sidebar = document.getElementById('dashSidebar');
             const toggle = toggleBtn;
@@ -2655,7 +2971,11 @@
             }
         });
 
-        console.log('✅ Nur Travel ready.');
+        // ============================================================
+        // INIT
+        // ============================================================
+        renderPackages('all');
+        console.log('🌙 Nur Travel — Your Umrah Journey Awaits.');
     </script>
 
 </body>
