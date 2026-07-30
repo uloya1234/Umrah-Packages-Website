@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -44,6 +44,56 @@
             --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Dark mode overrides */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f4ed;
+            --bg-surface: #ffffff;
+            --bg-input: #fcfaf7;
+            --bg-hover: #f0ece6;
+            --border-color: rgba(26, 77, 62, 0.1);
+            --text-primary: #1e1e1e;
+            --text-secondary: #5a5a5a;
+            --text-tertiary: #8a8a8a;
+            --shadow-color: rgba(26, 77, 62, 0.08);
+            --chat-bg-user: #1a4d3e;
+            --chat-bg-assistant: #f8f4ed;
+            --chat-text-user: #ffffff;
+            --chat-text-assistant: #1e1e1e;
+            --navbar-bg: transparent;
+            --navbar-text: rgba(255, 255, 255, 0.85);
+            --footer-bg: #1e1e1e;
+            --footer-text: rgba(255, 255, 255, 0.7);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0d0d0f;
+            --bg-secondary: #141418;
+            --bg-surface: #1a1a20;
+            --bg-input: #1e1e26;
+            --bg-hover: #22222d;
+            --border-color: #2a2a36;
+            --text-primary: #e8e8ed;
+            --text-secondary: #a0a0a8;
+            --text-tertiary: #6b6b75;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --chat-bg-user: #262632;
+            --chat-bg-assistant: #1a1a20;
+            --chat-text-user: #e8e8ed;
+            --chat-text-assistant: #e8e8ed;
+            --navbar-bg: rgba(13, 13, 15, 0.92);
+            --navbar-text: rgba(255, 255, 255, 0.85);
+            --footer-bg: #0d0d0f;
+            --footer-text: rgba(255, 255, 255, 0.7);
+            --emerald: #2a6b56;
+            --emerald-light: #3a8b76;
+            --gold: #c9a84c;
+            --gold-light: #e0c86e;
+            --cream: #1a1a20;
+            --off-white: #141418;
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 16px 56px rgba(0, 0, 0, 0.6);
         }
 
         /* ===== RESET & BASE ===== */
@@ -62,10 +112,11 @@
 
         body {
             font-family: var(--font-sans);
-            color: var(--text);
-            background: var(--off-white);
+            color: var(--text-primary);
+            background: var(--bg-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         a {
@@ -115,7 +166,7 @@
             font-size: clamp(2rem, 4vw, 3.2rem);
             font-weight: 700;
             line-height: 1.2;
-            color: var(--charcoal);
+            color: var(--text-primary);
             margin-bottom: 16px;
         }
 
@@ -125,7 +176,7 @@
 
         .section-sub {
             font-size: 1.1rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             max-width: 600px;
             line-height: 1.7;
         }
@@ -138,6 +189,7 @@
             margin-right: auto;
         }
 
+        /* ===== BUTTONS ===== */
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -302,11 +354,11 @@
             width: 100%;
             z-index: 1000;
             padding: 16px 0;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             background: transparent;
         }
         .navbar.scrolled {
-            background: rgba(252, 250, 247, 0.92);
+            background: var(--navbar-bg);
             backdrop-filter: blur(16px);
             box-shadow: 0 2px 24px rgba(0, 0, 0, 0.06);
             padding: 10px 0;
@@ -329,6 +381,9 @@
         }
         .navbar.scrolled .nav-logo {
             color: var(--emerald);
+        }
+        [data-theme="dark"] .navbar.scrolled .nav-logo {
+            color: var(--gold);
         }
         .nav-logo .logo-icon {
             display: flex;
@@ -359,12 +414,12 @@
         .nav-links a {
             font-size: 0.9rem;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.85);
+            color: var(--navbar-text);
             transition: var(--transition);
             position: relative;
         }
         .navbar.scrolled .nav-links a {
-            color: var(--charcoal-light);
+            color: var(--text-primary);
         }
         .nav-links a:hover {
             color: var(--gold);
@@ -389,13 +444,13 @@
             gap: 16px;
         }
         .nav-actions .btn-signin {
-            color: rgba(255, 255, 255, 0.85);
+            color: var(--navbar-text);
             font-weight: 500;
             font-size: 0.9rem;
             transition: var(--transition);
         }
         .navbar.scrolled .nav-actions .btn-signin {
-            color: var(--charcoal-light);
+            color: var(--text-primary);
         }
         .nav-actions .btn-signin:hover {
             color: var(--gold);
@@ -427,12 +482,12 @@
             display: block;
             width: 26px;
             height: 2.5px;
-            background: #fff;
+            background: var(--navbar-text);
             border-radius: 4px;
             transition: var(--transition);
         }
         .navbar.scrolled .nav-toggle span {
-            background: var(--charcoal);
+            background: var(--text-primary);
         }
         .nav-toggle.active span:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
@@ -563,9 +618,9 @@
 
         /* ===== TRUST SECTION ===== */
         .trust-section {
-            background: var(--off-white);
+            background: var(--bg-secondary);
             padding: 60px 0;
-            border-bottom: 1px solid rgba(26, 77, 62, 0.06);
+            border-bottom: 1px solid var(--border-color);
         }
         .trust-grid {
             display: grid;
@@ -573,12 +628,12 @@
             gap: 24px;
         }
         .trust-card {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius-sm);
             padding: 24px 20px;
             text-align: center;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 77, 62, 0.04);
+            border: 1px solid var(--border-color);
             transition: var(--transition);
         }
         .trust-card:hover {
@@ -593,17 +648,17 @@
         .trust-card h4 {
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--charcoal);
+            color: var(--text-primary);
         }
         .trust-card p {
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-top: 4px;
         }
 
         /* ===== PACKAGES ===== */
         .packages-section {
-            background: var(--cream);
+            background: var(--bg-primary);
             padding: 80px 0;
         }
         .packages-header {
@@ -626,9 +681,9 @@
             border-radius: 100px;
             font-size: 0.8rem;
             font-weight: 500;
-            background: #fff;
-            color: var(--text-muted);
-            border: 1px solid rgba(26, 77, 62, 0.08);
+            background: var(--bg-surface);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
             transition: var(--transition);
         }
         .packages-filters button.active,
@@ -645,11 +700,11 @@
         }
 
         .package-card {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 77, 62, 0.06);
+            border: 1px solid var(--border-color);
             transition: var(--transition);
             display: flex;
             flex-direction: column;
@@ -660,13 +715,13 @@
         }
         .package-card .pkg-header {
             padding: 24px 24px 16px;
-            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+            border-bottom: 1px solid var(--border-color);
         }
         .package-card .pkg-header .pkg-name {
             font-family: var(--font-serif);
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--charcoal);
+            color: var(--text-primary);
         }
         .package-card .pkg-header .pkg-stars {
             color: var(--gold);
@@ -682,7 +737,7 @@
             flex-direction: column;
             gap: 6px;
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
         .package-card .pkg-body .pkg-meta i {
             width: 20px;
@@ -690,7 +745,7 @@
         }
         .package-card .pkg-footer {
             padding: 16px 24px 24px;
-            border-top: 1px solid rgba(26, 77, 62, 0.04);
+            border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -707,7 +762,7 @@
             font-family: var(--font-sans);
             font-size: 0.8rem;
             font-weight: 400;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
         .package-card .pkg-footer .pkg-actions {
             display: flex;
@@ -739,7 +794,7 @@
 
         /* ===== INCLUDED SECTION ===== */
         .included-section {
-            background: var(--off-white);
+            background: var(--bg-secondary);
             padding: 80px 0;
         }
         .included-grid {
@@ -749,12 +804,12 @@
             margin-top: 40px;
         }
         .included-card {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius-sm);
             padding: 28px 24px;
             text-align: center;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 77, 62, 0.04);
+            border: 1px solid var(--border-color);
             transition: var(--transition);
         }
         .included-card:hover {
@@ -769,18 +824,18 @@
         .included-card h4 {
             font-size: 1rem;
             font-weight: 600;
-            color: var(--charcoal);
+            color: var(--text-primary);
             margin-bottom: 6px;
         }
         .included-card p {
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
         /* ===== HOW IT WORKS ===== */
         .how-section {
-            background: var(--cream);
+            background: var(--bg-primary);
             padding: 80px 0;
         }
         .how-grid {
@@ -811,19 +866,19 @@
         .how-step h4 {
             font-size: 1.1rem;
             font-weight: 600;
-            color: var(--charcoal);
+            color: var(--text-primary);
             margin-bottom: 6px;
         }
         .how-step p {
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             max-width: 260px;
             margin: 0 auto;
         }
 
         /* ===== WHY CHOOSE US ===== */
         .why-section {
-            background: var(--off-white);
+            background: var(--bg-secondary);
             padding: 80px 0;
         }
         .why-grid {
@@ -836,11 +891,11 @@
             display: flex;
             gap: 16px;
             align-items: flex-start;
-            background: #fff;
+            background: var(--bg-surface);
             padding: 24px;
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 77, 62, 0.04);
+            border: 1px solid var(--border-color);
         }
         .why-item .icon {
             font-size: 1.4rem;
@@ -851,17 +906,17 @@
         .why-item h4 {
             font-size: 1rem;
             font-weight: 600;
-            color: var(--charcoal);
+            color: var(--text-primary);
         }
         .why-item p {
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
         /* ===== MAKKAH & MADINAH ===== */
         .cities-section {
-            background: var(--cream);
+            background: var(--bg-primary);
             padding: 80px 0;
         }
         .cities-grid {
@@ -871,7 +926,7 @@
             margin-top: 40px;
         }
         .city-card {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
@@ -906,22 +961,22 @@
             padding: 24px;
         }
         .city-card .city-body p {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             line-height: 1.7;
             font-size: 0.95rem;
         }
 
         /* ===== FLIGHT SEARCH ===== */
         .flight-search-section {
-            background: var(--off-white);
+            background: var(--bg-secondary);
             padding: 80px 0;
         }
         .search-card {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius);
             padding: 40px;
             box-shadow: var(--shadow-md);
-            border: 1px solid rgba(26, 77, 62, 0.04);
+            border: 1px solid var(--border-color);
             max-width: 900px;
             margin: 0 auto;
         }
@@ -938,7 +993,7 @@
         .search-card .form-group label {
             font-size: 0.8rem;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -946,12 +1001,13 @@
         .search-card .form-group select {
             padding: 12px 16px;
             border-radius: var(--radius-sm);
-            border: 1px solid rgba(26, 77, 62, 0.1);
+            border: 1px solid var(--border-color);
             font-family: var(--font-sans);
             font-size: 0.95rem;
-            background: var(--off-white);
+            background: var(--bg-input);
             transition: var(--transition);
             width: 100%;
+            color: var(--text-primary);
         }
         .search-card .form-group input:focus,
         .search-card .form-group select:focus {
@@ -976,7 +1032,7 @@
 
         /* ===== TESTIMONIALS ===== */
         .testimonials-section {
-            background: var(--cream);
+            background: var(--bg-primary);
             padding: 80px 0;
         }
         .testimonials-grid {
@@ -986,11 +1042,11 @@
             margin-top: 40px;
         }
         .testimonial-card {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius-sm);
             padding: 28px;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 77, 62, 0.04);
+            border: 1px solid var(--border-color);
             transition: var(--transition);
         }
         .testimonial-card:hover {
@@ -1004,7 +1060,7 @@
         }
         .testimonial-card blockquote {
             font-size: 0.95rem;
-            color: var(--charcoal);
+            color: var(--text-primary);
             line-height: 1.7;
             font-style: italic;
             margin-bottom: 16px;
@@ -1029,15 +1085,16 @@
         .testimonial-card .author .name {
             font-weight: 600;
             font-size: 0.95rem;
+            color: var(--text-primary);
         }
         .testimonial-card .author .loc {
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
 
         /* ===== FAQ ===== */
         .faq-section {
-            background: var(--off-white);
+            background: var(--bg-secondary);
             padding: 80px 0;
         }
         .faq-list {
@@ -1048,14 +1105,14 @@
             gap: 12px;
         }
         .faq-item {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius-sm);
-            border: 1px solid rgba(26, 77, 62, 0.06);
+            border: 1px solid var(--border-color);
             overflow: hidden;
             transition: var(--transition);
         }
         .faq-item:hover {
-            border-color: rgba(26, 77, 62, 0.12);
+            border-color: var(--gold-subtle);
         }
         .faq-item .faq-question {
             width: 100%;
@@ -1068,7 +1125,7 @@
             background: none;
             border: none;
             text-align: left;
-            color: var(--charcoal);
+            color: var(--text-primary);
             transition: var(--transition);
             gap: 16px;
         }
@@ -1078,7 +1135,7 @@
         .faq-item .faq-question i {
             transition: var(--transition);
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             flex-shrink: 0;
         }
         .faq-item.active .faq-question i {
@@ -1096,15 +1153,15 @@
             padding: 0 24px 20px;
         }
         .faq-item .faq-answer p {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.7;
         }
 
         /* ===== FOOTER ===== */
         .footer {
-            background: var(--charcoal);
-            color: rgba(255, 255, 255, 0.7);
+            background: var(--footer-bg);
+            color: var(--footer-text);
             padding: 60px 0 30px;
         }
         .footer .container {
@@ -1192,7 +1249,7 @@
         .dashboard-wrapper {
             display: none;
             min-height: 100vh;
-            background: var(--off-white);
+            background: var(--bg-primary);
         }
         .dashboard-wrapper.active {
             display: flex;
@@ -1200,8 +1257,8 @@
 
         .dash-sidebar {
             width: 260px;
-            background: #fff;
-            border-right: 1px solid rgba(26, 77, 62, 0.06);
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
             padding: 24px 16px;
             display: flex;
             flex-direction: column;
@@ -1219,7 +1276,7 @@
             font-weight: 700;
             color: var(--emerald);
             padding: 0 12px 24px;
-            border-bottom: 1px solid rgba(26, 77, 62, 0.06);
+            border-bottom: 1px solid var(--border-color);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -1241,7 +1298,7 @@
             gap: 12px;
             padding: 10px 14px;
             border-radius: var(--radius-sm);
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-weight: 500;
             font-size: 0.9rem;
             transition: var(--transition);
@@ -1249,8 +1306,8 @@
             cursor: pointer;
         }
         .dash-nav .nav-item:hover {
-            background: rgba(26, 77, 62, 0.05);
-            color: var(--charcoal);
+            background: var(--bg-hover);
+            color: var(--text-primary);
         }
         .dash-nav .nav-item.active {
             background: rgba(26, 77, 62, 0.08);
@@ -1271,7 +1328,7 @@
         }
 
         .dash-sidebar .dash-user {
-            border-top: 1px solid rgba(26, 77, 62, 0.06);
+            border-top: 1px solid var(--border-color);
             padding-top: 16px;
             margin-top: 8px;
             display: flex;
@@ -1293,11 +1350,11 @@
         .dash-sidebar .dash-user .info .name {
             font-weight: 600;
             font-size: 0.9rem;
-            color: var(--charcoal);
+            color: var(--text-primary);
         }
         .dash-sidebar .dash-user .info .email {
             font-size: 0.75rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
 
         .dash-main {
@@ -1305,6 +1362,7 @@
             flex: 1;
             padding: 32px 40px 60px;
             min-height: 100vh;
+            background: var(--bg-primary);
         }
 
         .dash-header {
@@ -1319,6 +1377,7 @@
             font-family: var(--font-serif);
             font-size: 1.8rem;
             font-weight: 700;
+            color: var(--text-primary);
         }
         .dash-header h2 span {
             color: var(--emerald);
@@ -1334,12 +1393,12 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: #fff;
-            border: 1px solid rgba(26, 77, 62, 0.06);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             transition: var(--transition);
         }
         .dash-header .dash-actions .notif-btn:hover {
@@ -1354,7 +1413,7 @@
             height: 8px;
             border-radius: 50%;
             background: #e74c3c;
-            border: 2px solid #fff;
+            border: 2px solid var(--bg-surface);
         }
 
         /* NOTIFICATIONS DROPDOWN */
@@ -1365,10 +1424,10 @@
             right: 0;
             width: 340px;
             max-height: 420px;
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(26, 77, 62, 0.06);
+            border: 1px solid var(--border-color);
             overflow: hidden;
             z-index: 100;
             animation: slideDown 0.25s ease forwards;
@@ -1381,8 +1440,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 16px 20px;
-            border-bottom: 1px solid rgba(26, 77, 62, 0.06);
+            border-bottom: 1px solid var(--border-color);
             font-weight: 600;
+            color: var(--text-primary);
         }
         .notif-dropdown .notif-header button {
             font-size: 0.75rem;
@@ -1401,12 +1461,12 @@
         }
         .notif-dropdown .notif-item {
             padding: 12px 20px;
-            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+            border-bottom: 1px solid var(--border-color);
             transition: var(--transition);
             cursor: default;
         }
         .notif-dropdown .notif-item:hover {
-            background: var(--cream);
+            background: var(--bg-hover);
         }
         .notif-dropdown .notif-item.unread {
             background: rgba(201, 168, 76, 0.04);
@@ -1414,11 +1474,11 @@
         }
         .notif-dropdown .notif-item .notif-text {
             font-size: 0.85rem;
-            color: var(--charcoal);
+            color: var(--text-primary);
         }
         .notif-dropdown .notif-item .notif-time {
             font-size: 0.7rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-top: 4px;
         }
 
@@ -1430,11 +1490,11 @@
             margin-bottom: 32px;
         }
         .dash-card {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius-sm);
             padding: 24px;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 77, 62, 0.04);
+            border: 1px solid var(--border-color);
             transition: var(--transition);
         }
         .dash-card:hover {
@@ -1443,7 +1503,7 @@
         }
         .dash-card .label {
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: 600;
@@ -1452,12 +1512,12 @@
             font-family: var(--font-serif);
             font-size: 1.6rem;
             font-weight: 700;
-            color: var(--charcoal);
+            color: var(--text-primary);
             margin: 6px 0 2px;
         }
         .dash-card .sub {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
         .dash-card .icon-bg {
             float: right;
@@ -1467,18 +1527,18 @@
 
         /* Trip timeline */
         .timeline {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius-sm);
             padding: 28px;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 77, 62, 0.04);
+            border: 1px solid var(--border-color);
             margin-top: 20px;
         }
         .timeline .tl-item {
             display: flex;
             gap: 20px;
             padding: 16px 0;
-            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+            border-bottom: 1px solid var(--border-color);
             align-items: flex-start;
         }
         .timeline .tl-item:last-child {
@@ -1500,11 +1560,11 @@
         }
         .timeline .tl-item .tl-content .tl-title {
             font-weight: 600;
-            color: var(--charcoal);
+            color: var(--text-primary);
         }
         .timeline .tl-item .tl-content .tl-desc {
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
         .timeline .tl-item .tl-content .tl-status {
             font-size: 0.75rem;
@@ -1524,18 +1584,18 @@
 
         /* Document list */
         .doc-list {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius-sm);
             padding: 8px 0;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 77, 62, 0.04);
+            border: 1px solid var(--border-color);
         }
         .doc-list .doc-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 14px 24px;
-            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+            border-bottom: 1px solid var(--border-color);
             gap: 16px;
         }
         .doc-list .doc-item:last-child {
@@ -1552,10 +1612,11 @@
         }
         .doc-list .doc-item .doc-info .doc-name {
             font-weight: 500;
+            color: var(--text-primary);
         }
         .doc-list .doc-item .doc-info .doc-date {
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
         .doc-list .doc-item .doc-actions {
             display: flex;
@@ -1586,11 +1647,11 @@
 
         /* Payment table */
         .payment-table {
-            background: #fff;
+            background: var(--bg-surface);
             border-radius: var(--radius-sm);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 77, 62, 0.04);
+            border: 1px solid var(--border-color);
             margin-top: 16px;
             width: 100%;
             border-collapse: collapse;
@@ -1603,23 +1664,24 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
         .payment-table td {
             padding: 14px 20px;
-            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+            border-bottom: 1px solid var(--border-color);
             font-size: 0.9rem;
+            color: var(--text-primary);
         }
         .payment-table tr:last-child td {
             border-bottom: none;
         }
 
-        /* ===== SETTINGS (enhanced) ===== */
+        /* ===== SETTINGS ===== */
         .settings-nav {
             display: flex;
             gap: 8px;
             margin-bottom: 28px;
-            border-bottom: 1px solid rgba(26, 77, 62, 0.08);
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 8px;
             flex-wrap: wrap;
         }
@@ -1628,14 +1690,14 @@
             border-radius: 100px;
             font-weight: 500;
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             transition: var(--transition);
             background: transparent;
             border: 1px solid transparent;
         }
         .settings-nav .settings-nav-item:hover {
-            background: rgba(26, 77, 62, 0.04);
-            color: var(--charcoal);
+            background: var(--bg-hover);
+            color: var(--text-primary);
         }
         .settings-nav .settings-nav-item.active {
             background: var(--emerald);
@@ -1656,15 +1718,16 @@
             align-items: center;
             justify-content: space-between;
             padding: 12px 0;
-            border-bottom: 1px solid rgba(26, 77, 62, 0.04);
+            border-bottom: 1px solid var(--border-color);
         }
         .toggle-group .toggle-label {
             font-size: 0.95rem;
             font-weight: 500;
+            color: var(--text-primary);
         }
         .toggle-group .toggle-desc {
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
         .toggle-switch {
             position: relative;
@@ -1694,64 +1757,117 @@
             left: 22px;
         }
 
-        /* ===== CHAT (Noor AI) ===== */
-        .chat-container {
-            background: #fff;
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(26, 77, 62, 0.04);
+        /* ===== CHAT (Noor AI) - Redesigned ===== */
+        .chat-wrapper {
+            background: var(--bg-surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 500px;
+            height: 600px;
+            box-shadow: var(--shadow-md);
         }
+        .chat-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-secondary);
+        }
+        .chat-header .chat-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+        .chat-header .chat-title .noor-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--accent-gradient, linear-gradient(135deg, #5b7fff, #8b5cf6));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .chat-header .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .chat-header .chat-status .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 20px 24px;
             display: flex;
             flex-direction: column;
             gap: 12px;
+            background: var(--bg-primary);
         }
         .chat-message {
             max-width: 80%;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
+            padding: 12px 18px;
+            border-radius: var(--radius-md);
             font-size: 0.95rem;
             line-height: 1.6;
             animation: fadeInUp 0.3s ease;
+            word-wrap: break-word;
         }
         .chat-message.user {
             align-self: flex-end;
-            background: var(--emerald);
-            color: #fff;
+            background: var(--chat-bg-user);
+            color: var(--chat-text-user);
             border-bottom-right-radius: 4px;
         }
         .chat-message.assistant {
             align-self: flex-start;
-            background: var(--cream);
-            color: var(--charcoal);
+            background: var(--chat-bg-assistant);
+            color: var(--chat-text-assistant);
             border-bottom-left-radius: 4px;
+            border: 1px solid var(--border-color);
         }
         .chat-message .timestamp {
             font-size: 0.7rem;
-            opacity: 0.7;
+            opacity: 0.6;
             margin-top: 6px;
             display: block;
         }
+
         .chat-input-area {
             display: flex;
             gap: 12px;
-            padding: 16px 20px;
-            border-top: 1px solid rgba(26, 77, 62, 0.06);
-            background: var(--off-white);
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-secondary);
         }
         .chat-input-area input {
             flex: 1;
-            padding: 10px 16px;
-            border: 1px solid rgba(26, 77, 62, 0.1);
-            border-radius: 100px;
+            padding: 12px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
             font-size: 0.95rem;
+            background: var(--bg-input);
+            color: var(--text-primary);
             transition: var(--transition);
         }
         .chat-input-area input:focus {
@@ -1759,16 +1875,21 @@
             border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
         }
+        .chat-input-area input::placeholder {
+            color: var(--text-tertiary);
+        }
         .chat-input-area button {
-            padding: 10px 20px;
-            border-radius: 100px;
-            background: var(--gold);
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            background: var(--accent-gradient, linear-gradient(135deg, #5b7fff, #8b5cf6));
             color: #fff;
             font-weight: 600;
             transition: var(--transition);
+            white-space: nowrap;
         }
         .chat-input-area button:hover {
-            background: var(--gold-light);
+            transform: scale(1.03);
+            box-shadow: 0 4px 16px rgba(91, 127, 255, 0.3);
         }
 
         /* Toast */
@@ -1794,6 +1915,73 @@
             display: flex;
         }
 
+        /* ===== NOOR LOGO POPUP ===== */
+        .noor-popup-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 9998;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .noor-popup-overlay.active {
+            display: flex;
+        }
+        .noor-popup {
+            background: var(--bg-surface);
+            border-radius: var(--radius);
+            max-width: 420px;
+            width: 100%;
+            padding: 40px 32px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            position: relative;
+            animation: fadeInUp 0.3s ease;
+            text-align: center;
+        }
+        .noor-popup .close-popup {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .noor-popup .close-popup:hover {
+            color: var(--text-primary);
+        }
+        .noor-popup .noor-icon {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+        .noor-popup h3 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .noor-popup p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .noor-popup .version {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            background: var(--bg-hover);
+            padding: 4px 16px;
+            border-radius: 100px;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .footer .container {
@@ -1812,25 +2000,20 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: rgba(15, 51, 40, 0.98);
+                background: var(--bg-surface);
                 backdrop-filter: blur(16px);
                 padding: 24px;
                 gap: 16px;
                 border-radius: 0 0 var(--radius) var(--radius);
                 box-shadow: var(--shadow-lg);
-            }
-            .navbar.scrolled .nav-links {
-                background: rgba(252, 250, 247, 0.98);
+                border: 1px solid var(--border-color);
             }
             .nav-links.open {
                 display: flex;
             }
             .nav-links a {
-                color: #fff;
+                color: var(--text-primary);
                 font-size: 1rem;
-            }
-            .navbar.scrolled .nav-links a {
-                color: var(--charcoal);
             }
             .nav-toggle {
                 display: flex;
@@ -1905,8 +2088,8 @@
                 width: 300px;
                 right: -20px;
             }
-            .chat-container {
-                height: 400px;
+            .chat-wrapper {
+                height: 450px;
             }
         }
 
@@ -1942,8 +2125,11 @@
                 width: 260px;
                 right: -10px;
             }
-            .chat-container {
-                height: 350px;
+            .chat-wrapper {
+                height: 380px;
+            }
+            .chat-message {
+                max-width: 90%;
             }
         }
     </style>
@@ -2308,68 +2494,82 @@
     AUTH MODAL
     ============================================================ -->
     <div id="authModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(15,51,40,0.6);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;">
-        <div style="background:#fff;border-radius:var(--radius);max-width:440px;width:100%;padding:40px 32px;box-shadow:var(--shadow-lg);position:relative;max-height:90vh;overflow-y:auto;">
-            <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:20px;font-size:1.4rem;color:var(--text-muted);background:none;border:none;cursor:pointer;"><i class="fas fa-times"></i></button>
+        <div style="background:var(--bg-surface);border-radius:var(--radius);max-width:440px;width:100%;padding:40px 32px;box-shadow:var(--shadow-lg);position:relative;max-height:90vh;overflow-y:auto;border:1px solid var(--border-color);">
+            <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:20px;font-size:1.4rem;color:var(--text-secondary);background:none;border:none;cursor:pointer;"><i class="fas fa-times"></i></button>
             <div id="authFormContainer">
                 <!-- Sign In Form -->
                 <div id="signinForm">
-                    <h3 style="font-family:var(--font-serif);font-size:1.6rem;font-weight:700;margin-bottom:6px;">Welcome Back</h3>
-                    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:24px;">Sign in to manage your Umrah journey.</p>
+                    <h3 style="font-family:var(--font-serif);font-size:1.6rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">Welcome Back</h3>
+                    <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:24px;">Sign in to manage your Umrah journey.</p>
                     <div class="form-group" style="margin-bottom:16px;">
-                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label>
-                        <input type="email" id="signinEmail" placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Email</label>
+                        <input type="email" id="signinEmail" placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" />
                     </div>
                     <div class="form-group" style="margin-bottom:20px;">
-                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Password</label>
-                        <input type="password" id="signinPassword" placeholder="••••••••" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Password</label>
+                        <input type="password" id="signinPassword" placeholder="••••••••" style="width:100%;padding:12px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" />
                     </div>
                     <button id="signInBtn" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Sign In</button>
-                    <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-muted);">
+                    <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-secondary);">
                         Don't have an account? <a href="#" onclick="showAuthForm('signup')" style="color:var(--gold);font-weight:600;">Create one</a>
                     </div>
                     <div style="margin-top:12px;text-align:center;">
-                        <a href="#" onclick="showAuthForm('reset')" style="font-size:0.85rem;color:var(--text-muted);">Forgot password?</a>
+                        <a href="#" onclick="showAuthForm('reset')" style="font-size:0.85rem;color:var(--text-secondary);">Forgot password?</a>
                     </div>
                 </div>
                 <!-- Sign Up Form -->
                 <div id="signupForm" style="display:none;">
-                    <h3 style="font-family:var(--font-serif);font-size:1.6rem;font-weight:700;margin-bottom:6px;">Create Account</h3>
-                    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:24px;">Start planning your Umrah journey today.</p>
+                    <h3 style="font-family:var(--font-serif);font-size:1.6rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">Create Account</h3>
+                    <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:24px;">Start planning your Umrah journey today.</p>
                     <div class="form-group" style="margin-bottom:14px;">
-                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Full Name</label>
-                        <input type="text" id="signupName" placeholder="Ahmed Ali" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Full Name</label>
+                        <input type="text" id="signupName" placeholder="Ahmed Ali" style="width:100%;padding:12px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" />
                     </div>
                     <div class="form-group" style="margin-bottom:14px;">
-                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label>
-                        <input type="email" id="signupEmail" placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Email</label>
+                        <input type="email" id="signupEmail" placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" />
                     </div>
                     <div class="form-group" style="margin-bottom:14px;">
-                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Phone Number</label>
-                        <input type="tel" id="signupPhone" placeholder="+44 7700 123456" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Phone Number</label>
+                        <input type="tel" id="signupPhone" placeholder="+44 7700 123456" style="width:100%;padding:12px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" />
                     </div>
                     <div class="form-group" style="margin-bottom:20px;">
-                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Password</label>
-                        <input type="password" id="signupPassword" placeholder="••••••••" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Password</label>
+                        <input type="password" id="signupPassword" placeholder="••••••••" style="width:100%;padding:12px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" />
                     </div>
                     <button id="signUpBtn" class="btn-gold" style="width:100%;justify-content:center;padding:14px;">Create Account</button>
-                    <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-muted);">
+                    <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-secondary);">
                         Already have an account? <a href="#" onclick="showAuthForm('signin')" style="color:var(--gold);font-weight:600;">Sign In</a>
                     </div>
                 </div>
                 <!-- Reset Password -->
                 <div id="resetForm" style="display:none;">
-                    <h3 style="font-family:var(--font-serif);font-size:1.6rem;font-weight:700;margin-bottom:6px;">Reset Password</h3>
-                    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:24px;">We'll send you a link to reset your password.</p>
+                    <h3 style="font-family:var(--font-serif);font-size:1.6rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">Reset Password</h3>
+                    <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:24px;">We'll send you a link to reset your password.</p>
                     <div class="form-group" style="margin-bottom:20px;">
-                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label>
-                        <input type="email" id="resetEmail" placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" />
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Email</label>
+                        <input type="email" id="resetEmail" placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" />
                     </div>
                     <button id="resetBtn" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Send Reset Link</button>
-                    <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-muted);">
+                    <div style="margin-top:16px;text-align:center;font-size:0.9rem;color:var(--text-secondary);">
                         <a href="#" onclick="showAuthForm('signin')" style="color:var(--gold);font-weight:600;">Back to Sign In</a>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    NOOR LOGO POPUP
+    ============================================================ -->
+    <div class="noor-popup-overlay" id="noorPopup">
+        <div class="noor-popup">
+            <button class="close-popup" onclick="closeNoorPopup()"><i class="fas fa-times"></i></button>
+            <div class="noor-icon"><i class="fas fa-brain"></i></div>
+            <h3>Noor AI</h3>
+            <p>Your intelligent Umrah travel assistant. Noor helps you with travel tips, spiritual guidance, and answers to all your Umrah-related questions — available 24/7.</p>
+            <p style="margin-top:12px;">Built with ❤️ for pilgrims worldwide.</p>
+            <span class="version">v2.0 · Powered by Gemini</span>
         </div>
     </div>
 
@@ -2392,9 +2592,9 @@
                 <div class="nav-item" data-tab="dash-messages"><i class="fas fa-envelope"></i> Messages <span class="badge-dot"></span></div>
                 <div class="nav-item" data-tab="dash-support"><i class="fas fa-headset"></i> Support</div>
                 <div class="nav-item" data-tab="dash-settings"><i class="fas fa-cog"></i> Settings</div>
-                <!-- NEW: Noor AI Tab -->
+                <!-- Noor AI Tab -->
                 <div class="nav-item" data-tab="dash-ai"><i class="fas fa-brain"></i> Noor AI</div>
-                <div class="nav-item" style="margin-top:12px;border-top:1px solid rgba(26,77,62,0.06);padding-top:12px;" id="signOutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+                <div class="nav-item" style="margin-top:12px;border-top:1px solid var(--border-color);padding-top:12px;" id="signOutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
             </nav>
             <div class="dash-user">
                 <div class="avatar" id="dashUserAvatar">A</div>
@@ -2458,7 +2658,7 @@
                 </div>
 
                 <div class="timeline animated-border">
-                    <h4 style="font-family:var(--font-serif);font-size:1.1rem;font-weight:700;margin-bottom:12px;">Your Journey Timeline</h4>
+                    <h4 style="font-family:var(--font-serif);font-size:1.1rem;font-weight:700;margin-bottom:12px;color:var(--text-primary);">Your Journey Timeline</h4>
                     <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane-departure"></i></div><div class="tl-content"><div class="tl-title">Departure from London</div><div class="tl-desc">15 Sep 2026 · 10:30 AM · LHR Terminal 3</div><div class="tl-status"><i class="fas fa-check-circle" style="color:var(--emerald);"></i> Confirmed</div></div></div>
                     <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane-arrival"></i></div><div class="tl-content"><div class="tl-title">Arrival in Jeddah</div><div class="tl-desc">16 Sep 2026 · 6:45 AM · King Abdulaziz Airport</div><div class="tl-status"><i class="fas fa-clock" style="color:var(--gold);"></i> Pending</div></div></div>
                     <div class="tl-item"><div class="tl-icon"><i class="fas fa-bus"></i></div><div class="tl-content"><div class="tl-title">Transfer to Makkah</div><div class="tl-desc">16 Sep 2026 · 8:00 AM · Private transfer</div><div class="tl-status"><i class="fas fa-clock" style="color:var(--gold);"></i> Pending</div></div></div>
@@ -2471,8 +2671,8 @@
 
             <!-- ===== MY TRIP ===== -->
             <div class="dash-tab" id="dash-trip">
-                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">My Trip Details</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Full itinerary for your Umrah journey.</p>
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">My Trip Details</h3>
+                <p style="color:var(--text-secondary);margin-bottom:20px;">Full itinerary for your Umrah journey.</p>
                 <div class="timeline animated-border">
                     <div class="tl-item"><div class="tl-icon"><i class="fas fa-calendar-check"></i></div><div class="tl-content"><div class="tl-title">Trip ID: NUR-2026-001</div><div class="tl-desc">10 nights · 15 – 26 Sep 2026 · Premium Umrah Package</div><div class="tl-status"><span class="badge badge-green"><i class="fas fa-check"></i> Confirmed</span></div></div></div>
                     <div class="tl-item"><div class="tl-icon"><i class="fas fa-plane"></i></div><div class="tl-content"><div class="tl-title">Flight: London → Jeddah</div><div class="tl-desc">Saudi Airlines · SV102 · 15 Sep 2026 · 10:30 AM</div></div></div>
@@ -2485,20 +2685,20 @@
 
             <!-- ===== FLIGHTS ===== -->
             <div class="dash-tab" id="dash-flights">
-                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Flight Information</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Your flight details and status.</p>
-                <div class="animated-border" style="background:#fff;border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">Flight Information</h3>
+                <p style="color:var(--text-secondary);margin-bottom:20px;">Your flight details and status.</p>
+                <div class="animated-border" style="background:var(--bg-surface);border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow-sm);border:1px solid var(--border-color);">
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Airline</span><div style="font-weight:600;font-size:1.1rem;">Saudi Airlines</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Flight Number</span><div style="font-weight:600;font-size:1.1rem;">SV102 / SV103</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Departure</span><div>London (LHR) · 15 Sep 2026 · 10:30 AM</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Arrival</span><div>Jeddah (JED) · 16 Sep 2026 · 6:45 AM</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Terminal</span><div>LHR T3 · JED Terminal 1</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Baggage</span><div>30kg checked · 7kg carry-on</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">PNR</span><div style="font-family:monospace;font-weight:600;">NUR1234ABC</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Status</span><div><span class="badge badge-green"><i class="fas fa-check"></i> Confirmed</span></div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Airline</span><div style="font-weight:600;font-size:1.1rem;color:var(--text-primary);">Saudi Airlines</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Flight Number</span><div style="font-weight:600;font-size:1.1rem;color:var(--text-primary);">SV102 / SV103</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Departure</span><div style="color:var(--text-primary);">London (LHR) · 15 Sep 2026 · 10:30 AM</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Arrival</span><div style="color:var(--text-primary);">Jeddah (JED) · 16 Sep 2026 · 6:45 AM</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Terminal</span><div style="color:var(--text-primary);">LHR T3 · JED Terminal 1</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Baggage</span><div style="color:var(--text-primary);">30kg checked · 7kg carry-on</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">PNR</span><div style="font-family:monospace;font-weight:600;color:var(--text-primary);">NUR1234ABC</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Status</span><div><span class="badge badge-green"><i class="fas fa-check"></i> Confirmed</span></div></div>
                     </div>
-                    <div style="display:flex;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(26,77,62,0.06);flex-wrap:wrap;">
+                    <div style="display:flex;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border-color);flex-wrap:wrap;">
                         <button class="btn-primary" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-eye"></i> View Flight Details</button>
                         <button class="btn-secondary" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-download"></i> Download Itinerary</button>
                         <button class="btn-outline-gold" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-headset"></i> Contact Support</button>
@@ -2508,20 +2708,20 @@
 
             <!-- ===== UMRah PACKAGE ===== -->
             <div class="dash-tab" id="dash-package">
-                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Your Umrah Package</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">All the details of your selected package.</p>
-                <div class="animated-border" style="background:#fff;border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">Your Umrah Package</h3>
+                <p style="color:var(--text-secondary);margin-bottom:20px;">All the details of your selected package.</p>
+                <div class="animated-border" style="background:var(--bg-surface);border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow-sm);border:1px solid var(--border-color);">
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Package Name</span><div style="font-weight:600;font-size:1.1rem;">Premium Umrah Package</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Duration</span><div>10 nights · 15–26 Sep 2026</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Makkah Hotel</span><div>Hilton Suites · 5-star · Deluxe Room</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Madinah Hotel</span><div>Anwar Al Madinah · 5-star · Premium Room</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Room Type</span><div>Double · 2 Adults</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Transportation</span><div>Private transfers included</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Visa</span><div>Assistance provided · Documents ready</div></div>
-                        <div><span style="font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;">Status</span><div><span class="badge badge-green"><i class="fas fa-check"></i> Confirmed</span></div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Package Name</span><div style="font-weight:600;font-size:1.1rem;color:var(--text-primary);">Premium Umrah Package</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Duration</span><div style="color:var(--text-primary);">10 nights · 15–26 Sep 2026</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Makkah Hotel</span><div style="color:var(--text-primary);">Hilton Suites · 5-star · Deluxe Room</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Madinah Hotel</span><div style="color:var(--text-primary);">Anwar Al Madinah · 5-star · Premium Room</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Room Type</span><div style="color:var(--text-primary);">Double · 2 Adults</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Transportation</span><div style="color:var(--text-primary);">Private transfers included</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Visa</span><div style="color:var(--text-primary);">Assistance provided · Documents ready</div></div>
+                        <div><span style="font-weight:600;color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;">Status</span><div><span class="badge badge-green"><i class="fas fa-check"></i> Confirmed</span></div></div>
                     </div>
-                    <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(26,77,62,0.06);display:flex;gap:12px;flex-wrap:wrap;">
+                    <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border-color);display:flex;gap:12px;flex-wrap:wrap;">
                         <button class="btn-gold" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-file-pdf"></i> Download Package Details</button>
                         <button class="btn-secondary" style="padding:10px 24px;font-size:0.85rem;"><i class="fas fa-edit"></i> Request Changes</button>
                     </div>
@@ -2530,8 +2730,8 @@
 
             <!-- ===== DOCUMENTS ===== -->
             <div class="dash-tab" id="dash-documents">
-                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Your Documents</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Important travel documents for your journey.</p>
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">Your Documents</h3>
+                <p style="color:var(--text-secondary);margin-bottom:20px;">Important travel documents for your journey.</p>
                 <div class="doc-list animated-border">
                     <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Flight Itinerary</div><div class="doc-date">Updated 12 Aug 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
                     <div class="doc-item"><div class="doc-info"><i class="fas fa-file-pdf"></i><div><div class="doc-name">Hotel Confirmation - Makkah</div><div class="doc-date">Updated 10 Aug 2026</div></div></div><div class="doc-actions"><button class="btn-view"><i class="fas fa-eye"></i> View</button><button class="btn-dl"><i class="fas fa-download"></i> Download</button></div></div>
@@ -2544,12 +2744,12 @@
 
             <!-- ===== PAYMENTS ===== -->
             <div class="dash-tab" id="dash-payments">
-                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Payments</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Your payment summary and history.</p>
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">Payments</h3>
+                <p style="color:var(--text-secondary);margin-bottom:20px;">Your payment summary and history.</p>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px;">
                     <div class="dash-card animated-border"><div class="label">Total Package Price</div><div class="value">£3,450</div></div>
                     <div class="dash-card animated-border"><div class="label">Amount Paid</div><div class="value" style="color:var(--emerald);">£3,450</div></div>
-                    <div class="dash-card animated-border"><div class="label">Remaining Balance</div><div class="value" style="color:var(--text-muted);">£0</div></div>
+                    <div class="dash-card animated-border"><div class="label">Remaining Balance</div><div class="value" style="color:var(--text-secondary);">£0</div></div>
                     <div class="dash-card animated-border"><div class="label">Payment Due</div><div class="value" style="font-size:1.2rem;">Paid in Full</div></div>
                 </div>
                 <table class="payment-table animated-border">
@@ -2568,28 +2768,28 @@
 
             <!-- ===== MESSAGES ===== -->
             <div class="dash-tab" id="dash-messages">
-                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Messages</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Conversations with your travel support team.</p>
-                <div class="animated-border" style="background:#fff;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);overflow:hidden;">
-                    <div style="padding:16px 20px;border-bottom:1px solid rgba(26,77,62,0.04);display:flex;justify-content:space-between;align-items:center;">
-                        <span style="font-weight:600;">Support Team</span>
-                        <span style="font-size:0.75rem;color:var(--text-muted);">Active now</span>
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">Messages</h3>
+                <p style="color:var(--text-secondary);margin-bottom:20px;">Conversations with your travel support team.</p>
+                <div class="animated-border" style="background:var(--bg-surface);border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);border:1px solid var(--border-color);overflow:hidden;">
+                    <div style="padding:16px 20px;border-bottom:1px solid var(--border-color);display:flex;justify-content:space-between;align-items:center;">
+                        <span style="font-weight:600;color:var(--text-primary);">Support Team</span>
+                        <span style="font-size:0.75rem;color:var(--text-secondary);">Active now</span>
                     </div>
                     <div style="padding:20px;">
                         <div style="display:flex;gap:12px;margin-bottom:16px;">
                             <div style="background:var(--emerald);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;flex-shrink:0;">S</div>
-                            <div style="background:var(--cream);padding:12px 16px;border-radius:var(--radius-sm);max-width:75%;"><p style="font-size:0.9rem;color:var(--charcoal);">Assalamu Alaikum Ahmed, your Umrah package has been confirmed. We've sent the documents to your email.</p><span style="font-size:0.7rem;color:var(--text-muted);">10:30 AM</span></div>
+                            <div style="background:var(--bg-hover);padding:12px 16px;border-radius:var(--radius-sm);max-width:75%;"><p style="font-size:0.9rem;color:var(--text-primary);">Assalamu Alaikum Ahmed, your Umrah package has been confirmed. We've sent the documents to your email.</p><span style="font-size:0.7rem;color:var(--text-secondary);">10:30 AM</span></div>
                         </div>
                         <div style="display:flex;gap:12px;justify-content:flex-end;margin-bottom:16px;">
-                            <div style="background:#e8f0ee;padding:12px 16px;border-radius:var(--radius-sm);max-width:75%;"><p style="font-size:0.9rem;color:var(--charcoal);">Wa alaikum assalam, thank you! I've received the documents. Everything looks good.</p><span style="font-size:0.7rem;color:var(--text-muted);">10:45 AM</span></div>
+                            <div style="background:var(--bg-hover);padding:12px 16px;border-radius:var(--radius-sm);max-width:75%;"><p style="font-size:0.9rem;color:var(--text-primary);">Wa alaikum assalam, thank you! I've received the documents. Everything looks good.</p><span style="font-size:0.7rem;color:var(--text-secondary);">10:45 AM</span></div>
                         </div>
                         <div style="display:flex;gap:12px;margin-bottom:16px;">
                             <div style="background:var(--emerald);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;flex-shrink:0;">S</div>
-                            <div style="background:var(--cream);padding:12px 16px;border-radius:var(--radius-sm);max-width:75%;"><p style="font-size:0.9rem;color:var(--charcoal);">Excellent! We'll send you a reminder 2 days before your departure with all the final details.</p><span style="font-size:0.7rem;color:var(--text-muted);">11:00 AM</span></div>
+                            <div style="background:var(--bg-hover);padding:12px 16px;border-radius:var(--radius-sm);max-width:75%;"><p style="font-size:0.9rem;color:var(--text-primary);">Excellent! We'll send you a reminder 2 days before your departure with all the final details.</p><span style="font-size:0.7rem;color:var(--text-secondary);">11:00 AM</span></div>
                         </div>
                     </div>
-                    <div style="padding:16px 20px;border-top:1px solid rgba(26,77,62,0.04);display:flex;gap:12px;">
-                        <input type="text" placeholder="Type your message..." style="flex:1;padding:10px 16px;border:1px solid rgba(26,77,62,0.1);border-radius:100px;font-size:0.9rem;" />
+                    <div style="padding:16px 20px;border-top:1px solid var(--border-color);display:flex;gap:12px;">
+                        <input type="text" placeholder="Type your message..." style="flex:1;padding:10px 16px;border:1px solid var(--border-color);border-radius:100px;font-size:0.9rem;background:var(--bg-input);color:var(--text-primary);" />
                         <button class="btn-primary" style="padding:10px 20px;border-radius:100px;font-size:0.85rem;"><i class="fas fa-paper-plane"></i> Send</button>
                     </div>
                 </div>
@@ -2597,36 +2797,36 @@
 
             <!-- ===== SUPPORT ===== -->
             <div class="dash-tab" id="dash-support">
-                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Support Center</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">We're here to help you every step of the way.</p>
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">Support Center</h3>
+                <p style="color:var(--text-secondary);margin-bottom:20px;">We're here to help you every step of the way.</p>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
                     <div class="dash-card animated-border" style="text-align:center;cursor:pointer;" onclick="document.getElementById('dash-messages').click();">
                         <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-comment-dots"></i></div>
-                        <h4 style="margin-top:8px;font-weight:600;">Live Chat</h4>
-                        <p style="font-size:0.85rem;color:var(--text-muted);">Chat with our support team</p>
+                        <h4 style="margin-top:8px;font-weight:600;color:var(--text-primary);">Live Chat</h4>
+                        <p style="font-size:0.85rem;color:var(--text-secondary);">Chat with our support team</p>
                     </div>
                     <div class="dash-card animated-border" style="text-align:center;cursor:pointer;" onclick="window.location.href='mailto:support@nurtravel.com'">
                         <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-envelope"></i></div>
-                        <h4 style="margin-top:8px;font-weight:600;">Email Us</h4>
-                        <p style="font-size:0.85rem;color:var(--text-muted);">support@nurtravel.com</p>
+                        <h4 style="margin-top:8px;font-weight:600;color:var(--text-primary);">Email Us</h4>
+                        <p style="font-size:0.85rem;color:var(--text-secondary);">support@nurtravel.com</p>
                     </div>
                     <div class="dash-card animated-border" style="text-align:center;cursor:pointer;" onclick="window.location.href='tel:+442012345678'">
                         <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-phone"></i></div>
-                        <h4 style="margin-top:8px;font-weight:600;">Call Us</h4>
-                        <p style="font-size:0.85rem;color:var(--text-muted);">+44 20 1234 5678</p>
+                        <h4 style="margin-top:8px;font-weight:600;color:var(--text-primary);">Call Us</h4>
+                        <p style="font-size:0.85rem;color:var(--text-secondary);">+44 20 1234 5678</p>
                     </div>
                     <div class="dash-card animated-border" style="text-align:center;" onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth'});showPublic();">
                         <div style="font-size:2rem;color:var(--gold);"><i class="fas fa-question-circle"></i></div>
-                        <h4 style="margin-top:8px;font-weight:600;">FAQs</h4>
-                        <p style="font-size:0.85rem;color:var(--text-muted);">Find answers quickly</p>
+                        <h4 style="margin-top:8px;font-weight:600;color:var(--text-primary);">FAQs</h4>
+                        <p style="font-size:0.85rem;color:var(--text-secondary);">Find answers quickly</p>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== SETTINGS (Enhanced) ===== -->
+            <!-- ===== SETTINGS ===== -->
             <div class="dash-tab" id="dash-settings">
-                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Account Settings</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Manage your profile, security, and preferences.</p>
+                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">Account Settings</h3>
+                <p style="color:var(--text-secondary);margin-bottom:20px;">Manage your profile, security, and preferences.</p>
 
                 <div class="settings-nav">
                     <button class="settings-nav-item active" data-stab="settings-profile">Profile</button>
@@ -2634,17 +2834,18 @@
                     <button class="settings-nav-item" data-stab="settings-notif-pref">Notifications</button>
                     <button class="settings-nav-item" data-stab="settings-privacy">Privacy</button>
                     <button class="settings-nav-item" data-stab="settings-billing">Billing</button>
+                    <button class="settings-nav-item" data-stab="settings-appearance">Appearance</button>
                 </div>
 
                 <div class="settings-content">
                     <!-- Profile -->
                     <div id="settings-profile" class="settings-pane active">
-                        <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
+                        <div style="background:var(--bg-surface);border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border-color);">
                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Full Name</label><input type="text" id="settingsFullName" value="Ahmed Ali" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Email</label><input type="email" id="settingsEmail" value="ahmed@example.com" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Phone Number</label><input type="tel" id="settingsPhone" value="+44 7700 123456" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Language</label><select id="settingsLanguage" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;"><option>English</option><option>Arabic</option><option>Urdu</option></select></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Full Name</label><input type="text" id="settingsFullName" value="Ahmed Ali" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Email</label><input type="email" id="settingsEmail" value="ahmed@example.com" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Phone Number</label><input type="tel" id="settingsPhone" value="+44 7700 123456" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Language</label><select id="settingsLanguage" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);"><option>English</option><option>Arabic</option><option>Urdu</option></select></div>
                             </div>
                             <button class="btn-primary" style="margin-top:20px;padding:10px 28px;font-size:0.85rem;" id="saveProfileBtn"><i class="fas fa-save"></i> Save Profile</button>
                         </div>
@@ -2652,15 +2853,15 @@
 
                     <!-- Security -->
                     <div id="settings-security" class="settings-pane">
-                        <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
-                            <h4 style="font-weight:600;margin-bottom:16px;">Change Password</h4>
+                        <div style="background:var(--bg-surface);border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border-color);">
+                            <h4 style="font-weight:600;margin-bottom:16px;color:var(--text-primary);">Change Password</h4>
                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Current Password</label><input type="password" id="currentPassword" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">New Password</label><input type="password" id="newPassword" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Confirm Password</label><input type="password" id="confirmPassword" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Current Password</label><input type="password" id="currentPassword" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">New Password</label><input type="password" id="newPassword" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Confirm Password</label><input type="password" id="confirmPassword" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" /></div>
                             </div>
                             <button class="btn-primary" style="margin-top:16px;padding:10px 28px;font-size:0.85rem;" id="updatePasswordBtn"><i class="fas fa-key"></i> Update Password</button>
-                            <hr style="margin:24px 0;border-color:rgba(26,77,62,0.06);" />
+                            <hr style="margin:24px 0;border-color:var(--border-color);" />
                             <div class="toggle-group">
                                 <div><div class="toggle-label">Two-Factor Authentication</div><div class="toggle-desc">Add an extra layer of security to your account.</div></div>
                                 <div class="toggle-switch" id="twoFactorToggle" onclick="this.classList.toggle('active'); showToast('2FA setting updated.');"><div class="toggle-knob"></div></div>
@@ -2670,8 +2871,8 @@
 
                     <!-- Notifications Preferences -->
                     <div id="settings-notif-pref" class="settings-pane">
-                        <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
-                            <h4 style="font-weight:600;margin-bottom:16px;">Notification Preferences</h4>
+                        <div style="background:var(--bg-surface);border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border-color);">
+                            <h4 style="font-weight:600;margin-bottom:16px;color:var(--text-primary);">Notification Preferences</h4>
                             <div class="toggle-group"><div><div class="toggle-label">Email Notifications</div><div class="toggle-desc">Receive updates via email about your bookings.</div></div><div class="toggle-switch active" onclick="this.classList.toggle('active'); showToast('Email notification preference saved.');"><div class="toggle-knob"></div></div></div>
                             <div class="toggle-group"><div><div class="toggle-label">SMS Notifications</div><div class="toggle-desc">Get important alerts on your phone.</div></div><div class="toggle-switch" onclick="this.classList.toggle('active'); showToast('SMS preference saved.');"><div class="toggle-knob"></div></div></div>
                             <div class="toggle-group"><div><div class="toggle-label">Marketing Emails</div><div class="toggle-desc">Receive special offers and travel tips.</div></div><div class="toggle-switch" onclick="this.classList.toggle('active'); showToast('Marketing preference saved.');"><div class="toggle-knob"></div></div></div>
@@ -2682,8 +2883,8 @@
 
                     <!-- Privacy -->
                     <div id="settings-privacy" class="settings-pane">
-                        <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
-                            <h4 style="font-weight:600;margin-bottom:16px;">Privacy Controls</h4>
+                        <div style="background:var(--bg-surface);border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border-color);">
+                            <h4 style="font-weight:600;margin-bottom:16px;color:var(--text-primary);">Privacy Controls</h4>
                             <div class="toggle-group"><div><div class="toggle-label">Data Sharing</div><div class="toggle-desc">Allow us to share your data with trusted partners for travel services.</div></div><div class="toggle-switch active" onclick="this.classList.toggle('active'); showToast('Data sharing preference saved.');"><div class="toggle-knob"></div></div></div>
                             <div class="toggle-group"><div><div class="toggle-label">Account Visibility</div><div class="toggle-desc">Make your profile visible to other travelers (for group matching).</div></div><div class="toggle-switch" onclick="this.classList.toggle('active'); showToast('Visibility preference saved.');"><div class="toggle-knob"></div></div></div>
                             <button class="btn-primary" style="margin-top:16px;padding:10px 28px;font-size:0.85rem;" onclick="showToast('Privacy settings updated!')"><i class="fas fa-save"></i> Save Privacy Settings</button>
@@ -2692,18 +2893,36 @@
 
                     <!-- Billing -->
                     <div id="settings-billing" class="settings-pane">
-                        <div style="background:#fff;border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(26,77,62,0.04);">
-                            <h4 style="font-weight:600;margin-bottom:16px;">Billing Information</h4>
+                        <div style="background:var(--bg-surface);border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border-color);">
+                            <h4 style="font-weight:600;margin-bottom:16px;color:var(--text-primary);">Billing Information</h4>
                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Card Number</label><input type="text" placeholder="•••• •••• •••• ••••" value="**** **** **** 4242" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Expiry Date</label><input type="text" placeholder="MM/YY" value="12/27" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Billing Address</label><input type="text" placeholder="123 Main St, London, UK" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
-                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;">Postal Code</label><input type="text" placeholder="SW1A 1AA" value="SW1A 1AA" style="width:100%;padding:10px 14px;border:1px solid rgba(26,77,62,0.1);border-radius:var(--radius-sm);font-size:0.95rem;" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Card Number</label><input type="text" placeholder="•••• •••• •••• ••••" value="**** **** **** 4242" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Expiry Date</label><input type="text" placeholder="MM/YY" value="12/27" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Billing Address</label><input type="text" placeholder="123 Main St, London, UK" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" /></div>
+                                <div class="form-group"><label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:4px;color:var(--text-secondary);">Postal Code</label><input type="text" placeholder="SW1A 1AA" value="SW1A 1AA" style="width:100%;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.95rem;background:var(--bg-input);color:var(--text-primary);" /></div>
                             </div>
                             <button class="btn-primary" style="margin-top:16px;padding:10px 28px;font-size:0.85rem;" onclick="showToast('Billing information updated!')"><i class="fas fa-save"></i> Update Billing</button>
-                            <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(26,77,62,0.06);">
+                            <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border-color);">
                                 <button class="btn-secondary" style="border-color:#e74c3c;color:#e74c3c;padding:10px 28px;font-size:0.85rem;" onclick="if(confirm('Remove payment method?')) showToast('Payment method removed.');"><i class="fas fa-trash"></i> Remove Payment Method</button>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Appearance (Dark Mode) -->
+                    <div id="settings-appearance" class="settings-pane">
+                        <div style="background:var(--bg-surface);border-radius:var(--radius-sm);padding:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border-color);">
+                            <h4 style="font-weight:600;margin-bottom:16px;color:var(--text-primary);">Theme Preferences</h4>
+                            <div class="toggle-group">
+                                <div>
+                                    <div class="toggle-label">Dark Mode</div>
+                                    <div class="toggle-desc">Switch between light and dark themes for the entire website.</div>
+                                </div>
+                                <div class="toggle-switch" id="darkModeToggle" onclick="toggleDarkMode();">
+                                    <div class="toggle-knob"></div>
+                                </div>
+                            </div>
+                            <p style="font-size:0.85rem;color:var(--text-secondary);margin-top:12px;">Current theme: <strong id="currentThemeLabel">Light</strong></p>
+                            <button class="btn-primary" style="margin-top:16px;padding:10px 28px;font-size:0.85rem;" onclick="showToast('Theme preference saved!')"><i class="fas fa-save"></i> Save Theme</button>
                         </div>
                     </div>
                 </div>
@@ -2711,9 +2930,26 @@
 
             <!-- ===== NOOR AI ===== -->
             <div class="dash-tab" id="dash-ai">
-                <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;">Noor AI Assistant</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Ask anything about your Umrah journey – from travel tips to spiritual guidance.</p>
-                <div class="chat-container animated-border">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+                    <div>
+                        <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:var(--text-primary);margin-bottom:4px;">Noor AI Assistant</h3>
+                        <p style="color:var(--text-secondary);">Ask anything about your Umrah journey – from travel tips to spiritual guidance.</p>
+                    </div>
+                    <button onclick="openNoorPopup()" style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:var(--bg-hover);color:var(--text-primary);border:1px solid var(--border-color);font-size:0.85rem;transition:var(--transition);">
+                        <i class="fas fa-info-circle" style="color:var(--gold);"></i> About Noor
+                    </button>
+                </div>
+                <div class="chat-wrapper">
+                    <div class="chat-header">
+                        <div class="chat-title">
+                            <div class="noor-avatar">N</div>
+                            <span>Noor AI</span>
+                        </div>
+                        <div class="chat-status">
+                            <span class="status-dot"></span>
+                            <span>Online</span>
+                        </div>
+                    </div>
                     <div class="chat-messages" id="chatMessages">
                         <div class="chat-message assistant">
                             Assalamu Alaikum! I'm Noor, your AI travel assistant. How can I help you today?
@@ -2733,6 +2969,6 @@
     <div class="toast" id="toast"><i class="fas fa-check-circle" style="color:var(--gold);"></i> <span id="toastMessage">Saved!</span></div>
 
     <!-- Main JavaScript -->
-    <script src="main.js"></script>
+    <script src="main.js?v=3"></script>
 </body>
 </html>
